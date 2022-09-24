@@ -1,0 +1,101 @@
+@charset "utf-8";
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
+body{background:#fff;font-family:"微软雅黑"; }
+
+a{ text-decoration:none; outline:none;}
+a {star:expression(this.onFocus=this.blur());} 
+
+body,html{ }
+
+a,a:hover{color:#333; outline:none} 
+
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both;}
+.over{overflow:auto;zoom:1;}
+.clearfix{*zoom:1;}
+.clearfix:before,.clearfix:after {content:"";display:table;}
+.clearfix:after{clear:both;}
+.inline-block{ display:inline-block;*display:inline;*zoom:1;}
+
+
+.block{ display:block;}
+
+input,checkbox{ vertical-align:middle}
+label{ cursor:pointer}
+
+.relative{ position:relative}
+.abs_lft{ position:absolute; left:0px; top:0px}
+.abs_rgt{ position:absolute; right:0px; top:0px}
+.p10{ padding:10px}
+
+
+
+
+.hidden {display:none}
+/*设置页面宽度*/
+.wrap {clear:both; margin:0 auto;max-width:960px; padding:0 10px}
+.mt1 {margin-top:10px}
+.mt2 {margin-top:20px}
+.mt3 {margin-top:30px}
+.mt4 {margin-top:40px}
+.mt5 {margin-top:50px}
+.mt6 {margin-top:60px}
+.mt7 {margin-top:70px}
+.mt8 {margin-top:80px}
+.mt9 {margin-top:90px}
+
+/*************************************************************************************************************/
+/*头部*/
+.g-head {height:0px; position:relative; line-height:70px; overflow:hidden; background:#fff; border-bottom:3px solid #fff;color:#fff;}
+.g-head .title{font-size:16px; display:inline-block; float:left}
+.g-head .welcome{ font-size:14px; display:inline-block; float:right}
+
+/*************************************************************************************************************/
+/*底部*/
+.g-foot {font-family:"微软雅黑";font-size:12px;background:#fff;line-height:25px;color:#728196; text-align:center; border-top:2px solid #ecedf2}
+.g-foot .wrap{ padding-top:10px; padding-bottom:10px}
+
+/*************************************************************************************************************/
+/*主体*/
+.g-main {background:#ecedf2;padding:20px 0; overflow:hidden}
+.g-main  .wrap{ background:#FFF; padding:10px 0}
+
+.tab_head { overflow:hidden; padding:10px;  text-align:center;}
+.tab_head .tab{ display:block;padding:10px 20px; background:#fff; border:1px solid #c6c6c6; font-size:15px; margin-right:10px; cursor:pointer; display:inline-block; border-radius:3px; margin-bottom:5px}
+.tab_head .pressed{ background:#87CEFF;}
+
+.tab_main{height:auto; text-align:center; padding:5% 0; overflow:hidden; min-height:60vh;}
+.tab_main .qrcode{ border:1px solid #CCC; padding:2%; display:block; clear:both; margin:0 auto; width:90%; max-width:350px;}
+.tab_main h2{ font-size:14px; margin-bottom:20px}
+
+
+/*响应式布局部分*/
+@media (max-width:500px){
+	.tab_main{ padding:0; border:none;}
+	.tab_head { overflow:hidden; display:block}
+	.tab_head .tab{ display:block;  margin-right:0;padding:0; padding:5px 0}
+}
+
+
+.pass_content{ display: none}
+.pass_input{ font-size: 14px; border: dashed 2px #f33; padding: 20px; background: #FFC; margin: 5px; max-width: 650px; clear: both; margin: 0 auto}
+.pass_input .input{ border: 1px solid #ddd; line-height: 30px; height: 30px; width: 140px; padding: 0 5px}
+.pass_input .btn{ border: 1px solid #ddd; line-height: 30px; height: 30px; margin-left: 5px; padding: 0 15px; cursor: pointer}
