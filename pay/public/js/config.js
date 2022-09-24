@@ -3,7 +3,7 @@ var pay_list = [
     'type':'alipay2',
 	'name':'wx-支付',
 	'text':'打开wx扫一扫',
-	'qr':'https://www.helloimg.com/images/2022/09/24/Z8M7Nq.md.png',
+	'qr':'https://www.helloimg.com/images/2022/09/24/Z8Mklo.md.jpg',
     'pass':'',
   },
   {
