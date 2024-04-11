@@ -1,4 +1,4 @@
-﻿a:link {
+a:link {
  text-decoration: none;
 }
 a:visited {
@@ -22,7 +22,6 @@ a:active {
 .btn2 {
     display: inline-block;
     vertical-align: top;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1;
     text-align: center;
@@ -68,10 +67,10 @@ a:active {
     padding-left: 20px;
 }
 .tit {
-            margin: 0 auto;
-            padding: 4px;
-			font-size: 24px;
-            text-align: center;
+    margin: 0 auto;
+    padding: 4px;
+	font-size: 24px;
+    text-align: center;
 }
 ul {
     margin: 0;
