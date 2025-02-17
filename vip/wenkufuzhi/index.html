@@ -1,84 +1,90 @@
 <html>
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html">
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html">
 	<title>文档复制工具</title>
-	<link rel="shortcut icon" href="https://pic.imgdb.cn/item/6153f40b2ab3f51d91f5ccfe.png">
+	<link rel="shortcut icon" href="//pic.imgdb.cn/item/66449ed60ea9cb1403009d90.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
 	<link rel="stylesheet" href="./css/style.css" type="text/css" media="all">
+	<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://s2.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js"></script>
+	<link href="https://s2.pstatp.com/cdn/expire-1-M/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
+	<script src="https://s2.pstatp.com/cdn/expire-1-M/modernizr/2.8.3/modernizr.js"></script>
+	<script src="https://s2.pstatp.com/cdn/expire-1-M/layer/2.3/layer.js"></script>
+	<link href="https://s2.pstatp.com/cdn/expire-1-M/layer/2.3/skin/layer.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-    <script src="https://s2.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://s2.pstatp.com/cdn/expire-1-M/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
-    <script src="https://s2.pstatp.com/cdn/expire-1-M/modernizr/2.8.3/modernizr.js"></script>	
-    <script src="https://s2.pstatp.com/cdn/expire-1-M/layer/2.3/layer.js"></script>
-    <link href="https://s2.pstatp.com/cdn/expire-1-M/layer/2.3/skin/layer.css" rel="stylesheet">
-<body>
-	<div id="bg">
-		<canvas></canvas>
-		<canvas></canvas>
-		<canvas></canvas>
-	</div>
-	<h1 style="font-size:2.5em">文档复制工具</h1>
-	<div class="sub-main-w3">
-		<div class="sub-main-w3-form">
-			<h2>免费解析
-				<i class="fas fa-level-down-alt"></i>
-			</h2>
-			<div class="form-style-agile">
-				<label>
+	<body>
+		<div id="bg">
+			<canvas></canvas>
+			<canvas></canvas>
+			<canvas></canvas>
+		</div>
+		<h1 style="font-size:2.5em">文档复制工具</h1>
+		<div class="sub-main-w3">
+			<div class="sub-main-w3-form">
+				<h2>免费解析
+					<i class="fas fa-level-down-alt"></i>
+				</h2>
+				<div class="form-style-agile">
+					<label>
 					<i class="fas fa-link"></i>
 					链接：
 				</label>
-				<input id="docid" class="am-form-field" placeholder="你要下的文档的链接...." type="text" name="docid" required="" value="">
-			</div>
-			<!-- checkbox -->
-			<div class="wthree-text">
-				<ul style="padding-left:0px;">
-					<li>
-						<label class="anim">
+					<input id="docid" class="am-form-field" placeholder="你要下的文档的链接...." type="text" name="docid" required="" value="">
+				</div>
+				<!-- checkbox -->
+				<div class="wthree-text">
+					<ul style="padding-left:0px;">
+						<li>
+							<label class="anim">
 							<span></span>
 						</label>
-					</li>
-				</ul>
+						</li>
+					</ul>
+				</div>
+				<button id="upbtn" class="am-btn am-btn-success">提交</button>
+				<button id="more" class="am-btn am-btn-success" style="margin-left: 10px">更多方法</button>
+				<br>
+				<img src="https://www.helloimg.com/i/2024/05/15/66449a4da2ca4.png" alt="">
 			</div>
-			<button id="upbtn" class="am-btn am-btn-success">提交</button>
-        <button id="more" class="am-btn am-btn-success" style="margin-left: 10px">更多方法</button>
-        <br>
-        <img src="https://www.helloimg.com/i/2024/05/15/66449a4da2ca4.png" alt="" >
 		</div>
-	</div>
-	<div class="footer">
-	    
-<!--<p>
+		<div class="footer">
+
+			<!--<p>
 <b><a style="color:#f22;" target="_blank" href="https://www.crxsoso.com/search?keyword=%E5%A4%8D%E5%88%B6&store=chrome" rel="nofollow">chrome复制插件</a></b>   |    
 <b><a style="color:#f22;" target="_blank" href="https://www.crxsoso.com/search?keyword=%E5%A4%8D%E5%88%B6&store=edge" rel="nofollow">edge复制插件</a></b>
 </p>	    
 <p>1、内容复制需借助插件，请搜索并安装适配自己浏览器的插件</p>-->
-<p>使用说明：提交后，请使用浏览器打印功能，页面打印机另存为PDF。<a style="color:#f22;" target="_blank" href="https://pic.rmb.bdstatic.com/bjh/3d4779547dba211448b7de31ab5efe8c.jpeg" rel="nofollow">示例</a></p>
+			<p>使用说明：提交后，请使用浏览器打印功能，页面打印机另存为PDF。
+				<a style="color:#f22;" target="_blank" href="https://pic.rmb.bdstatic.com/bjh/3d4779547dba211448b7de31ab5efe8c.jpeg"
+					rel="nofollow">示例</a>
+			</p>
 
-<p>声明：本功能仅做内容的友好展示，未提供任何越权功能，供学习测试，请勿滥用。</p>
-<p class="center-align">
-        <a target="_blank" href="http://ijhif.yhzu.cn/" rel="nofollow">网购优惠</a>｜    	
-        <a target="_blank" href="../../waimai/" rel="nofollow">外卖红包</a> ｜   
-</p>
-     
-
-<p></p>
-
-</div>
+			<p>声明：本功能仅做内容的友好展示，未提供任何越权功能，供学习测试，请勿滥用。</p>
+			<p class="center-align">
+				<a target="_blank" href="http://ijhif.yhzu.cn/" rel="nofollow">网购优惠</a>｜
+				<a target="_blank" href="../../waimai/" rel="nofollow">外卖红包</a> ｜
+			</p>
 
 
-<script src="./js/canva_moving_effect.js"></script>
-<script>
-document.getElementById("upbtn").onclick = function(){
+			<p></p>
+
+		</div>
+
+
+		<script src="./js/canva_moving_effect.js"></script>
+		<script>
+			document.getElementById("upbtn").onclick = function(){
 var docid = document.getElementById("docid").value;
 window.open('http://bdwk.588230.com/wk.php?url='+docid);
 }
 document.getElementById("more").onclick = function(){
 	window.open("../../");
 }
-</script>
-</body>
+
+		</script>
+	</body>
+
 </html>
