@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name        🔥🔥🔥🔥文库文本选中复制🔥🔥🔥🔥
-// @description 解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
+// @name              🔥🔥🔥🔥文库文本选中复制🔥🔥🔥🔥
+// @description       解除网站不允许复制的限制，文本选中后点击复制按钮即可复制，主要用于 百度文库 道客巴巴 腾讯文档 豆丁网 无忧考网 学习啦 蓬勃范文 思否社区 力扣 知乎 语雀 等
 // @namespace         *://kaysar.top/vip/wenkufuzhi/
 // @supportURL        *://kaysar.top/vip/wenkufuzhi/
 // @homepage          *://kaysar.top/
@@ -95,14 +95,13 @@
 // @grant       GM_addStyle
 // @grant       GM_setClipboard
 // ==/UserScript==
-
 let dom = null;
 let isReadyToHidden = false;
 
 const instance = {
   id: "__copy",
   className: "__copy-button",
-  getInstance: function () {
+  getInstance: function() {
     if (dom === null) {
       const container = document.createElement("div");
       container.id = this.id;
@@ -126,7 +125,7 @@ const instance = {
     }
     return dom;
   },
-  show: function (event) {
+  show: function(event) {
     if (isReadyToHidden)
       return void 0;
     const dom2 = this.getInstance();
@@ -145,7 +144,7 @@ const instance = {
       }
     };
   },
-  hide: function () {
+  hide: function() {
     const dom2 = this.getInstance();
     dom2.style.opacity = "0";
   }
