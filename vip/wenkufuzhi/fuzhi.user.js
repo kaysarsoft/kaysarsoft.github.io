@@ -90,7 +90,7 @@
 // @match       *://*.rrdynb.com/*
 // @match       *://*.fuwu7.com/*
 // @match       *://*.xiangqiqipu.com/*
-// @icon        //pic.imgdb.cn/item/66449ed60ea9cb1403009d90.png
+// @icon        *://pic.imgdb.cn/item/66449ed60ea9cb1403009d90.png
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // @grant       GM_setClipboard
