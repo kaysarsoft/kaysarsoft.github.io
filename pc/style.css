@@ -62,7 +62,7 @@ a:active {
     background: none;
     border: 3px solid #5cb85c;
     *height: 15px;
-    *height: _15px;
+    *height: 15px;
     margin-right: 14px;
     padding-top: 5px;
     padding-right: 20px;
