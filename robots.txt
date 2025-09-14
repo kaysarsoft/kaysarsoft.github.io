@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+# 允许所有搜索引擎爬虫访问所有页面
+Sitemap: https://kaysarsoft.com/sitemap.xml
