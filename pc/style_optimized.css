@@ -1,24 +1,44 @@
+/* ===== 电脑系统下载中心 - 性能优化版 ===== */
 :root {
-    --primary: #4facfe;
-    --primary-dark: #0099ff;
-    --secondary: #00f2fe;
-    --accent: #5cb85c;
-    --accent-alt: #ff6b6b;
-    --text-dark: #2c3e50;
-    --text-light: #fff;
-    --text-muted: #6c757d;
-    --bg-light: #f8f9fa;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-hover: rgba(255, 255, 255, 0.15);
-    --group-bg: rgba(255, 255, 255, 0.9);
-    --border-radius: 20px;
-    --border-radius-small: 12px;
-    --spacing-unit: 1rem;
+    /* 核心颜色变量 */
+    --primary: #667eea;
+    --secondary: #764ba2;
+    --accent: #f093fb;
+    --success: #4ecdc4;
+    
+    /* 文本颜色 */
+    --text-dark: #2d3436;
+    --text-light: #ffffff;
+    --text-muted: #636e72;
+    
+    /* 背景 */
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --group-bg: rgba(255, 255, 255, 0.95);
+    
+    /* 阴影 */
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.2);
+    --shadow-colored: 0 8px 25px rgba(102, 126, 234, 0.3);
+    
+    /* 动画 */
+    --transition: all 0.3s ease;
+    --transition-fast: all 0.2s ease;
+    
+    /* 圆角和间距 */
+    --radius: 16px;
+    --radius-small: 12px;
+    --radius-large: 20px;
+    
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
 }
 
+/* ===== 基础重置 ===== */
 * {
     margin: 0;
     padding: 0;
@@ -26,18 +46,77 @@
 }
 
 body {
-    font-family: 'SJxingkai-C', 'Microsoft YaHei', sans-serif;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    font-family: 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+    background: var(--bg-gradient);
     color: var(--text-dark);
     line-height: 1.6;
-    padding: 0;
-    margin: 0;
     min-height: 100vh;
     overflow-x: hidden;
-    background-attachment: fixed;
 }
 
-/* 添加背景装饰元素 */
+/* ===== 容器布局 ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 清除默认样式冲突 */
+.unit-100 {
+    width: 100%;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.7s;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.language {
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    background: var(--group-bg);
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-medium);
+    padding: var(--spacing-xl);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* 下载内容样式 */
+.download-content {
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.9s;
+    opacity: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+/* 确保下载内容中的标题样式正确 */
+.download-content p {
+    width: 100%;
+    text-align: left;
+    margin-bottom: var(--spacing-lg);
+    box-sizing: border-box;
+}
+
+/* ===== 动态背景 ===== */
 body::before {
     content: '';
     position: fixed;
@@ -45,61 +124,88 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 25%),
-        radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 15%),
-        radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.2) 0%, transparent 30%);
-    z-index: -1;
-    animation: float 20s ease-in-out infinite;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(240, 147, 251, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(102, 126, 234, 0.2) 0%, transparent 50%);
+    z-index: -2;
 }
 
-/* 添加更多装饰元素 */
 body::after {
     content: '';
     position: fixed;
-    top: 20%;
-    right: -150px;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(79, 172, 254, 0.3) 0%, transparent 70%);
-    border-radius: 50%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%);
+    background-size: 50px 50px;
     z-index: -1;
-    animation: float 15s ease-in-out infinite alternate;
+    pointer-events: none;
 }
 
-body .bg-decor-1 {
+/* 浮动装饰 */
+.bg-decor {
     position: fixed;
-    bottom: 15%;
-    left: -100px;
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle, rgba(0, 242, 254, 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(240, 147, 251, 0.3) 0%, transparent 70%);
     border-radius: 50%;
     z-index: -1;
-    animation: float 18s ease-in-out infinite alternate-reverse;
+    animation: float 15s ease-in-out infinite;
+    box-shadow: 0 0 50px rgba(240, 147, 251, 0.3);
+    backdrop-filter: blur(10px);
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
+.bg-decor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 4s ease-in-out infinite;
 }
 
-/* 头部样式优化 */
+.bg-decor:nth-child(1) {
+    top: 20%;
+    right: -100px;
+    animation-delay: 0s;
+}
+
+.bg-decor:nth-child(2) {
+    bottom: 15%;
+    left: -80px;
+    animation-delay: -7s;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+}
+
+.bg-decor:nth-child(2)::before {
+    background: radial-gradient(circle, rgba(240, 147, 251, 0.4) 0%, transparent 70%);
+}
+
+/* ===== 头部样式 ===== */
 .header {
     text-align: center;
-    padding: calc(var(--spacing-unit) * 3.5) calc(var(--spacing-unit) * 1.5);
-    margin-bottom: calc(var(--spacing-unit) * 3);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
     background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: var(--transition);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-large);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-medium);
     position: relative;
+    transition: var(--transition);
     overflow: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 .header::before {
@@ -109,146 +215,358 @@ body .bg-decor-1 {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary-dark));
-    animation: gradientFlow 15s linear infinite;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    border-radius: var(--radius-large) var(--radius-large) 0 0;
+    animation: gradientShift 3s ease-in-out infinite alternate;
 }
 
-@keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+.header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(240, 147, 251, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.header:hover::after {
+    opacity: 1;
 }
 
 .header:hover {
-    background: var(--glass-hover);
     transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
 .header h3 {
-    font-size: 3rem;
-    margin-bottom: calc(var(--spacing-unit) * 1);
-    background: linear-gradient(45deg, #ffffff, #f0f0f0, #ffffff);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-sm);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
     letter-spacing: 2px;
-    font-weight: bold;
-    animation: textGradient 8s ease-in-out infinite;
-}
-
-@keyframes textGradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    animation: textGlow 3s ease-in-out infinite alternate;
+    position: relative;
+    z-index: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .header p {
-    font-size: 1.3rem;
-    color: white;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    margin-bottom: 0;
-    opacity: 0.9;
-    max-width: 800px;
-    margin: 0 auto;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 0 var(--spacing-sm);
 }
 
-/* 主内容区样式优化 */
+/* ===== 面包屑导航 ===== */
+.breadcrumb {
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    padding: 12px 20px;
+    border-radius: var(--radius-small);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.6s;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.breadcrumb::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: var(--transition);
+}
+
+.breadcrumb:hover::before {
+    left: 100%;
+}
+
+.breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+.breadcrumb a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: var(--transition);
+}
+
+.breadcrumb a:hover {
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.breadcrumb a:hover::after {
+    width: 100%;
+}
+
+.breadcrumb-separator {
+    color: var(--text-muted);
+    font-weight: 300;
+    opacity: 0.6;
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+.breadcrumb:hover .breadcrumb-separator {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+}
+
+.breadcrumb-current {
+    color: var(--text-dark);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ===== 主内容区域 ===== */
 .unit-100 {
     width: 100%;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.7s;
+    opacity: 0;
 }
 
 .language {
     text-align: center;
     margin: 0 auto;
-    padding: calc(var(--spacing-unit) * 3);
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(255, 255, 255, 0.3);
     position: relative;
+    background: var(--group-bg);
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-medium);
+    padding: var(--spacing-xl);
+    backdrop-filter: blur(10px);
     overflow: hidden;
-    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.language:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-hover);
-}
-
-/* 主内容区装饰性边框 */
 .language::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease-in-out infinite;
 }
 
-/* 分组标题样式优化 */
-.language p {
-    font-size: 1.8rem;
-    margin: calc(var(--spacing-unit) * 2.5) 0 calc(var(--spacing-unit) * 1.5);
-    color: var(--primary-dark);
-    font-weight: bold;
-    position: relative;
-    display: inline-block;
-    letter-spacing: 1px;
-    transition: var(--transition);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.language p:hover {
-    color: var(--primary);
-    transform: scale(1.03);
-}
-
-.language p::after {
+.language::after {
     content: '';
     position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
-    background-size: 200% auto;
-    border-radius: 2px;
-    animation: pulse 3s infinite, gradientFlow 8s linear infinite;
+    bottom: -50%;
+    right: -50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+    animation-delay: -10s;
+    opacity: 0.5;
 }
 
-@keyframes pulse {
-    0%, 100% {
-        width: 80px;
-    }
-    50% {
-        width: 120px;
-    }
+/* ===== 下载分组样式 ===== */
+.download-group {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out forwards;
+    backdrop-filter: blur(10px);
+    max-width: 100%;
+    width: 100%;
 }
 
-/* 按钮样式优化 */
+.download-group::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary), var(--accent), var(--secondary));
+    border-radius: var(--radius) 0 0 var(--radius);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease-in-out infinite;
+}
+
+.download-group::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(240, 147, 251, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.download-group:hover::after {
+    opacity: 1;
+}
+
+.download-group:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-heavy);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.download-group p {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: var(--spacing-lg);
+    text-align: left;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* 添加分组延迟动画 */
+.download-group:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.download-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.download-group:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.download-group:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.download-group:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+/* 下载分组标题图标 */
+.download-group:nth-child(1) p::before {
+    content: '💻';
+    margin-right: 10px;
+    font-size: 1.8rem;
+    animation: bounce 2s infinite;
+}
+
+.download-group:nth-child(2) p::before {
+    content: '📊';
+    margin-right: 10px;
+    font-size: 1.8rem;
+    animation: bounce 2s infinite 0.5s;
+}
+
+.download-group:nth-child(3) p::before {
+    content: '🔑';
+    margin-right: 10px;
+    font-size: 1.8rem;
+    animation: bounce 2s infinite 1s;
+}
+
+.download-group:nth-child(4) p::before {
+    content: '📱';
+    margin-right: 10px;
+    font-size: 1.8rem;
+    animation: bounce 2s infinite 1.5s;
+}
+
+.download-group:nth-child(5) p::before {
+    content: '📚';
+    margin-right: 10px;
+    font-size: 1.8rem;
+    animation: bounce 2s infinite 2s;
+}
+
+/* ===== 按钮样式系统 ===== */
 .btn2 {
     display: inline-block;
     vertical-align: top;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.4;
     text-align: center;
     text-decoration: none;
-    margin: 12px;
+    margin: 8px;
     border: none;
-    border-radius: 35px;
+    border-radius: var(--radius-small);
     cursor: pointer;
-    padding: 14px 32px;
+    padding: 12px 24px;
     background: linear-gradient(45deg, var(--primary), var(--secondary));
     color: var(--text-light);
-    box-shadow: 0 5px 18px rgba(79, 172, 254, 0.45);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.5px;
-    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    min-width: 120px;
+    max-width: 200px;
+    flex: 1;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn2::before {
@@ -259,8 +577,8 @@ body .bg-decor-1 {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: all 0.5s ease;
-    z-index: -1;
+    transition: var(--transition);
+    animation: shine 3s ease-in-out infinite;
 }
 
 .btn2::after {
@@ -271,20 +589,15 @@ body .bg-decor-1 {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
     transform: translate(-50%, -50%);
     transition: width 0.6s ease, height 0.6s ease;
-    z-index: -1;
 }
 
 .btn2:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.7);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.btn2:hover::before {
-    left: 100%;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .btn2:hover::after {
@@ -293,162 +606,102 @@ body .bg-decor-1 {
 }
 
 .btn2:active {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.5);
+    transform: translateY(-2px) scale(1.02);
 }
 
-/* 不同类型按钮的样式 */
+/* 按钮类型变体 */
 .btn-windows {
-    background: linear-gradient(45deg, #0078d7, #106ebe);
-}
-
-.btn-windows:hover {
-    box-shadow: 0 8px 25px rgba(0, 120, 215, 0.7);
+    background: linear-gradient(45deg, #0078d4, #106ebe);
+    box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3);
 }
 
 .btn-office {
-    background: linear-gradient(45deg, #185abd, #2b5797);
-}
-
-.btn-office:hover {
-    box-shadow: 0 8px 25px rgba(24, 90, 189, 0.7);
+    background: linear-gradient(45deg, #d83b01, #ff8c00);
+    box-shadow: 0 4px 15px rgba(216, 59, 1, 0.3);
 }
 
 .btn-tools {
-    background: linear-gradient(45deg, #ff6b6b, #ee5253);
-}
-
-.btn-tools:hover {
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.7);
+    background: linear-gradient(45deg, #e91e63, #ad1457);
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
 }
 
 .btn-software {
-    background: linear-gradient(45deg, #5cb85c, #4cae4c);
+    background: linear-gradient(45deg, #00b894, #00a085);
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
 }
 
-.btn-software:hover {
-    box-shadow: 0 8px 25px rgba(92, 184, 92, 0.7);
-}
-
-.btn-outline2 {
-    background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    background-image: linear-gradient(120deg, transparent 50%, var(--primary) 50%);
-    background-size: 220%;
-    transition: all 0.4s ease;
-}
-
-.btn-outline2:hover {
-    background-position: 100%;
-    color: var(--text-light);
-    border-color: transparent;
-    transform: translateY(-6px);
-}
-
-/* 下载区域分组样式优化 */
-.download-group {
-    margin-bottom: calc(var(--spacing-unit) * 3);
-    padding: calc(var(--spacing-unit) * 2.5);
-    background: var(--group-bg);
-    border-radius: var(--border-radius-small);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    position: relative;
-    overflow: hidden;
-}
-
-.download-group::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--primary), var(--secondary));
-}
-
-.download-group:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.95);
-}
-
-/* 分组内容容器 */
+/* ===== 下载内容 ===== */
 .download-content {
     position: relative;
-    padding-left: calc(var(--spacing-unit) * 2);
+    z-index: 1;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.9s;
+    opacity: 0;
 }
 
-/* 下载说明文字 */
-.download-description {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-bottom: calc(var(--spacing-unit) * 2);
-    line-height: 1.6;
-    text-align: left;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* 图片样式优化 */
-.download-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--border-radius-small);
-    margin-top: calc(var(--spacing-unit) * 3);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    border: 3px solid rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-}
-
-.download-image:hover {
-    transform: scale(1.03);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-}
-
-/* 图片容器样式 */
+/* ===== 图片容器 ===== */
 .image-container {
     position: relative;
     display: inline-block;
     overflow: hidden;
-    border-radius: var(--border-radius-small);
+    border-radius: var(--radius-large);
+    margin: var(--spacing-xl) 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 1s;
+    opacity: 0;
+    box-shadow: var(--shadow-medium);
 }
 
-.image-container::after {
+.image-container::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(79, 172, 254, 0.2), rgba(0, 242, 254, 0.2));
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
     opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+    transition: var(--transition);
+    z-index: 1;
 }
 
-.image-container:hover::after {
+.image-container:hover::before {
     opacity: 1;
 }
 
-/* 页脚样式优化 */
+.download-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition);
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+}
+
+.download-image:hover {
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    border-color: var(--accent);
+}
+
+.image-container:hover .download-image {
+    filter: brightness(1.1) contrast(1.05);
+}
+
+/* ===== 页脚样式 ===== */
 .footer {
     text-align: center;
-    padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 1.5);
-    margin-top: calc(var(--spacing-unit) * 4);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    margin-top: var(--spacing-xl);
     background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    border-radius: var(--border-radius);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-large);
     color: var(--text-light);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
+    box-shadow: var(--shadow-heavy);
+    border: 1px solid var(--glass-border);
 }
 
 .footer::before {
@@ -457,146 +710,141 @@ body .bg-decor-1 {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary-dark));
-    animation: gradientFlow 15s linear infinite;
-}
-
-.footer:hover {
-    background: var(--glass-hover);
-    transform: translateY(-3px);
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
 }
 
 .footer p {
     margin: 0;
     font-size: 1.1rem;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-weight: 300;
 }
 
-/* 响应式设计优化 */
-@media (max-width: 992px) {
-    .header h3 {
-        font-size: 2.5rem;
-    }
-    
-    .language p {
-        font-size: 1.5rem;
-    }
+/* ===== 下载建议样式 ===== */
+.download-group ul {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-    
-    .header {
-        padding: 40px 15px;
-    }
-    
-    .header h3 {
-        font-size: 2.2rem;
-        letter-spacing: 1px;
-    }
-    
-    .header p {
-        font-size: 1.1rem;
-    }
-    
-    .language {
-        padding: 25px;
-    }
-    
-    .language p {
-        font-size: 1.4rem;
-        margin: 25px 0 20px;
-    }
-    
-    .language p::after {
-        width: 60px;
-        height: 3px;
-    }
-    
-    @keyframes pulse {
-        0%, 100% {
-            width: 60px;
-        }
-        50% {
-            width: 90px;
-        }
-    }
-    
-    .btn2 {
-        font-size: 15px;
-        padding: 12px 28px;
-        margin: 10px;
-    }
-    
-    .download-group {
-        padding: 20px;
-        margin-bottom: 30px;
-    }
-    
-    .download-image {
-        margin-top: 30px;
-    }
-    
-    .footer {
-        padding: 30px 15px;
-        margin-top: 50px;
-    }
+.download-group li {
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-small);
+    border-left: 3px solid var(--success);
+    transition: var(--transition-fast);
+    font-weight: 500;
 }
 
-@media (max-width: 576px) {
-    .header h3 {
-        font-size: 1.8rem;
-    }
-    
-    .header p {
-        font-size: 1rem;
-    }
-    
-    .language {
-        padding: 20px 15px;
-    }
-    
-    .language p {
-        font-size: 1.2rem;
-    }
-    
-    .btn2 {
-        display: block;
-        width: 90%;
-        margin: 12px auto;
-        padding: 14px 20px;
-    }
-    
-    .download-group {
-        padding: 15px 10px;
-    }
-    
-    .download-image {
-        border-radius: 10px;
-    }
+.download-group li:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-light);
+    background: rgba(255, 255, 255, 1);
+    border-left-color: var(--primary);
 }
 
-/* 动画效果增强 */
+.download-group li::before {
+    content: '💡';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+}
+
+/* ===== 下载说明 ===== */
+.download-description {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.7;
+    text-align: left;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(240, 147, 251, 0.15));
+    border-radius: var(--radius);
+    border-left: 4px solid var(--primary);
+    font-weight: 500;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.8s;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.download-description::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: var(--transition);
+}
+
+.download-description:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(240, 147, 251, 0.2));
+}
+
+.download-description:hover::before {
+    left: 100%;
+}
+
+.download-description p {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* ===== 动画定义 ===== */
 @keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-12px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes textGlow {
+    0% { text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+    100% { text-shadow: 0 4px 25px rgba(240, 147, 251, 0.6); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes shine {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -604,148 +852,153 @@ body .bg-decor-1 {
     }
 }
 
-.header, .footer {
-    animation: float 6s ease-in-out infinite;
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        transform: translate3d(0,0,0);
+    }
+    40%, 43% {
+        animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        transform: translate3d(0, -30px, 0);
+    }
+    70% {
+        animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        transform: translate3d(0, -15px, 0);
+    }
+    90% {
+        transform: translate3d(0,-4px,0);
+    }
 }
 
-.download-group {
-    animation: fadeInUp 0.6s ease-out;
+/* ===== 响应式设计 ===== */
+@media (max-width: 1200px) {
+    .container { padding: var(--spacing-md); }
+    .header h3 { font-size: 2.5rem; }
+    .breadcrumb { font-size: 0.9rem; }
 }
 
-.download-group:nth-child(1) { animation-delay: 0.1s; }
-.download-group:nth-child(2) { animation-delay: 0.2s; }
-.download-group:nth-child(3) { animation-delay: 0.3s; }
-.download-group:nth-child(4) { animation-delay: 0.4s; }
-
-/* 平滑滚动优化 */
-html {
-    scroll-behavior: smooth;
+@media (max-width: 768px) {
+    .container { padding: var(--spacing-sm); }
+    .header { padding: var(--spacing-lg); }
+    .header h3 { font-size: 2rem; }
+    .language { padding: var(--spacing-lg); }
+    .download-group { padding: var(--spacing-lg); }
+    .btn2 { font-size: 14px; padding: 12px 20px; margin: 6px; }
+    
+    /* 面包屑导航响应式 */
+    .breadcrumb {
+        font-size: 0.85rem;
+        padding: 10px 16px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* 下载分组响应式 */
+    .download-group {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    /* 图片容器响应式 */
+    .image-container {
+        margin: var(--spacing-lg) 0;
+    }
 }
 
-/* 添加焦点样式，增强可访问性 */
+@media (max-width: 480px) {
+    .header h3 { font-size: 1.5rem; letter-spacing: 1px; }
+    .header p { font-size: 1rem; }
+    .download-group p { font-size: 1.2rem; }
+    .btn2 { font-size: 13px; padding: 10px 18px; margin: 8px 4px; }
+    .language { padding: var(--spacing-md); }
+    
+    /* 面包屑导航响应式 */
+    .breadcrumb {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .breadcrumb-separator {
+        display: none;
+    }
+    
+    .breadcrumb a {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    /* 下载分组响应式 */
+    .download-group {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .download-group p {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    
+    /* 下载内容响应式 */
+    .download-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* 按钮响应式 */
+    .btn2 {
+        width: 90%;
+        max-width: 200px;
+        margin: 8px 0;
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+    
+    /* 图片容器响应式 */
+    .image-container {
+        margin: var(--spacing-md) 0;
+    }
+    
+    .download-image {
+        border-width: 2px;
+    }
+    
+    /* 页脚响应式 */
+    .footer {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+    
+    .footer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== 无障碍和焦点 ===== */
 .btn2:focus {
-    outline: 3px solid rgba(79, 172, 254, 0.5);
+    outline: 3px solid rgba(102, 126, 234, 0.5);
     outline-offset: 2px;
 }
 
-/* 加载动画 */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.download-image:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
 }
 
-/* 工具提示效果优化 */
-.tooltip {
-    position: relative;
+/* ===== 滚动条美化 ===== */
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-.tooltip::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    margin-bottom: 8px;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.tooltip::before {
-    content: '';
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 6px solid transparent;
-    border-top-color: rgba(0, 0, 0, 0.9);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    margin-bottom: 2px;
-    z-index: 1000;
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--primary), var(--accent));
+    border-radius: 4px;
 }
 
-.tooltip:hover::after {
-    opacity: 1;
-    visibility: visible;
-    margin-bottom: 4px;
-}
-
-.tooltip:hover::before {
-    opacity: 1;
-    visibility: visible;
-    margin-bottom: -2px;
-}
-
-/* 为不同位置的工具提示添加样式 */
-.tooltip-top::after { bottom: 120%; top: auto; }
-.tooltip-bottom::after { top: 120%; bottom: auto; }
-.tooltip-left::after { left: auto; right: 120%; top: 50%; transform: translateY(-50%); }
-.tooltip-right::after { right: auto; left: 120%; top: 50%; transform: translateY(-50%); }
-
-/* 为按钮添加工具提示类 */
-.btn2 {
-    position: relative;
-}
-
-.btn2[data-tooltip]:not(.tooltip) {
-    position: relative;
-}
-
-.btn2[data-tooltip]:not(.tooltip)::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    margin-bottom: 8px;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.btn2[data-tooltip]:not(.tooltip)::before {
-    content: '';
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 6px solid transparent;
-    border-top-color: rgba(0, 0, 0, 0.9);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    margin-bottom: 2px;
-    z-index: 1000;
-}
-
-.btn2[data-tooltip]:not(.tooltip):hover::after {
-    opacity: 1;
-    visibility: visible;
-    margin-bottom: 4px;
-}
-
-.btn2[data-tooltip]:not(.tooltip):hover::before {
-    opacity: 1;
-    visibility: visible;
-    margin-bottom: -2px;
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, var(--accent), var(--secondary));
 }

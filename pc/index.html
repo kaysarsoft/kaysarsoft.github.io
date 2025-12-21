@@ -10,6 +10,17 @@
 	<title>电脑系统下载中心 - 高速安全下载各类系统软件、办公软件和激活工具</title>
 	<meta name="keywords" content="系统下载,Windows下载,Office下载,激活工具,常用软件,高速下载,电脑系统,办公软件,正版软件,免费下载">
 	<meta name="description" content="电脑系统下载中心提供各类操作系统、办公软件和实用工具的高速安全下载，包含Windows系统、Office办公软件、激活工具和常用软件，所有软件均来自官方渠道。">
+	<!-- DNS预解析 -->
+	<link rel="dns-prefetch" href="//cdn.jsdmirror.com">
+	<link rel="dns-prefetch" href="//vip.helloimg.com">
+	<link rel="dns-prefetch" href="//pic.imgdb.cn">
+	<link rel="dns-prefetch" href="//officecdn.microsoft.com">
+	<link rel="dns-prefetch" href="//www.microsoft.com">
+	<!-- 资源预加载 -->
+	<link rel="preconnect" href="https://cdn.jsdmirror.com">
+	<link rel="preconnect" href="https://vip.helloimg.com">
+	<link rel="preload" href="https://cdn.jsdmirror.com/gh/kaysarsoft/texiao@master/font/sanjihangkaiti/result.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="https://cdn.jsdmirror.com/gh/kaysarsoft/texiao@master/font/sanjihangkaiti/result.css"></noscript>
 	<!-- 结构化数据标记 -->
 	<script type="application/ld+json">
 	{
@@ -38,12 +49,66 @@
 	</script>
 	<link rel="shortcut icon" href="https://pic.imgdb.cn/item/66449ed60ea9cb1403009d90.png">
 	<!--引入字体，全局字体使用-->
-	<link rel="stylesheet" href="https://cdn.jsdmirror.com/gh/kaysarsoft/texiao@master/font/sanjihangkaiti/result.css" />
-	<link href="./style_optimized.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdmirror.com/gh/kaysarsoft/texiao@main/font/sanjihangkaiti/result.css" />
+	<style>
+	/* 关键内联CSS - 页面渲染必需样式 */
+	:root {
+            /* 核心颜色变量 */
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #4ecdc4;
+            
+            /* 文本颜色 */
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --text-muted: #636e72;
+            
+            /* 背景 */
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --group-bg: rgba(255, 255, 255, 0.95);
+            
+            /* 阴影 */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.2);
+            --shadow-colored: 0 8px 25px rgba(102, 126, 234, 0.3);
+            
+            /* 动画 */
+            --transition: all 0.3s ease;
+            --transition-fast: all 0.2s ease;
+            
+            /* 圆角和间距 - 优化间距 */
+            --radius: 16px;
+            --radius-small: 12px;
+            --radius-large: 20px;
+            
+            --spacing-sm: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+        }
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg-gradient); min-height: 100vh; color: var(--text-dark); }
+	.container { max-width: 1200px; margin: 0 auto; padding: var(--spacing-lg); position: relative; }
+	.header { text-align: center; margin-bottom: var(--spacing-lg); }
+	.header h3 { font-size: 2.2rem; margin-bottom: var(--spacing-sm); }
+	.download-group { background: rgba(255,255,255,0.95); border-radius: var(--radius); margin-bottom: var(--spacing-lg); padding: var(--spacing-lg); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+	.btn2 { display: inline-block; padding: 10px 20px; margin: 4px; border-radius: var(--radius-small); text-decoration: none; font-weight: 500; font-size: 14px; transition: var(--transition-fast); }
+	.btn-windows { background: linear-gradient(45deg, #0078d4, #106ebe); color: white; }
+	.btn-office { background: linear-gradient(45deg, #d83b01, #ff8c00); color: white; }
+	.btn-tools { background: linear-gradient(45deg, #e91e63, #ad1457); color: white; }
+	.btn-software { background: linear-gradient(45deg, #00b894, #00a085); color: white; }
+	.footer { text-align: center; margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: rgba(255,255,255,0.1); border-radius: var(--radius); }
+	</style>
+	<link href="./style_combined.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<!-- 背景装饰元素 -->
-	<div class="bg-decor-1"></div>
+	<div class="bg-decor"></div>
+	<div class="bg-decor"></div>
 	<div class="container">
 		<header class="header">
 			<h3>电脑系统下载中心</h3>
@@ -51,9 +116,10 @@
 		</header>
 
 		<!-- 面包屑导航 -->
-		<div class="breadcrumb" style="margin-bottom: 20px; padding: 10px 0; font-size: 0.9rem; color: #666;">
-			<a href="https://kaysarsoft.com" style="color: var(--accent); text-decoration: none;">首页</a> &gt; 
-			<span style="color: #333;">电脑系统下载中心</span>
+		<div class="breadcrumb">
+			<a href="https://kaysarsoft.com">首页</a>
+			<span class="breadcrumb-separator">></span>
+			<span class="breadcrumb-current">电脑系统下载中心</span>
 		</div>
 
 		<div class="unit-100">
@@ -87,7 +153,7 @@
 				<div class="download-group">
 					<div class="download-content">
 						<p>激活工具</p>
-						<a class="btn2 btn-tools" href="https://www.gitproxy.click/https://github.com/zbezj/HEU_KMS_Activator/releases/download/42.3.1/HEU_KMS_Activator_v42.3.1.rar" rel="nofollow" target="_blank" data-tooltip="强大的Windows和Office激活工具">HEU KMS 激活工具</a>
+						<a class="btn2 btn-tools" href="https://gh-proxy.net/https://github.com/zbezj/HEU_KMS_Activator/releases/download/42.3.1/HEU_KMS_Activator_v42.3.1.rar" rel="nofollow" target="_blank" data-tooltip="强大的Windows和Office激活工具">HEU KMS 激活工具</a>
 						<a class="btn2 btn-tools" href="https://otp.landian.vip/redirect/download.php?type=runtime&arch=x86&site=nyist" rel="nofollow" target="_blank" data-tooltip="Office部署和管理工具">Office Tool</a>
 						<a class="btn2 btn-tools" href="./idm激活.cmd" rel="nofollow" target="_blank" data-tooltip="下载并运行IDM激活脚本">IDM 激活</a>
 					</div>
@@ -97,14 +163,15 @@
 					<div class="download-content">
 						<p>常用软件</p>
 						<a class="btn2 btn-software" href="https://www.winrar.com.cn/download-711scp.html" rel="nofollow" target="_blank" data-tooltip="经典压缩解压软件">WINRAR</a>
-						<!-- <a class="btn2 btn-software" href="https://www.google.cn/chrome/?brand=JJTC&gclid=CjwKCAjw4KyqBhBCEiwAuKcOq2Sx5KJJUYrC2V0-3j32j7Oe1aR2tC90I2W30qgH01XUv4LpWfE5hoC2r8QAvD_BwE&gclsrc=aw.ds" rel="nofollow" target="_blank" data-tooltip="下载Google Chrome浏览器">Google Chrome</a> -->
+						<a class="btn2 btn-software" href="https://mirrors.tuna.tsinghua.edu.cn/github-release/obsproject/obs-studio/OBS%20Studio%2032.0.1/OBS-Studio-32.0.1-Windows-x64-Installer.exe" rel="nofollow" target="_blank" data-tooltip="强大的直播和录屏软件">直播&录屏obs</a>
+						<a class="btn2 btn-software" href="./screenshot.exe" rel="nofollow" target="_blank" data-tooltip="截图">截图工具</a>
 						<a class="btn2 btn-software" href="https://count.liqucn.com/d.php?id=78494939459&urlos=android&vc_offset=6&from_type=web" rel="nofollow" target="_blank" data-tooltip="畅言普通话学习软件">畅言普通话</a>
 					</div>
 				</div>
 
 				<!-- 添加下载提示图片 -->
 				<div class="image-container">
-					<img src="https://vip.helloimg.com/i/2024/05/15/66449a4da2ca4.png" alt="系统软件下载提示图片 - 电脑系统下载中心" class="download-image">
+					<img src="https://vip.helloimg.com/i/2024/05/15/66449a4da2ca4.png" alt="系统软件下载提示图片 - 电脑系统下载中心" class="download-image" loading="lazy" decoding="async">
 				</div>
 
 				<!-- 下载建议 -->
@@ -131,11 +198,12 @@
 				</div>
 			</div>
 		</div>
-			<footer class="footer">
-				<p>Copyright © 2024 凯撒电子商务团队 版权所有 | 提供技术支持</p>
-				<p style="margin-top: 8px; font-size: 0.9rem; opacity: 0.8;">本站仅提供软件下载链接，所有软件版权归原作者所有</p>
-			</footer>
-		</div>
+
+		<footer class="footer">
+			<p>Copyright © 2024 凯撒电子商务团队 版权所有 | 提供技术支持</p>
+			<p style="margin-top: 8px; font-size: 0.9rem; opacity: 0.8;">本站仅提供软件下载链接，所有软件版权归原作者所有</p>
+		</footer>
+	</div>
 </body>
 
 </html>
