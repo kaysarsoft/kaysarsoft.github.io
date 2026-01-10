@@ -1,0 +1,21 @@
+{
+  "name": "kaysarsoft",
+  "version": "1.0.0",
+  "description": "kaysarsoft 是一个现代化的综合性软件资源下载平台，提供各类操作系统、办公软件、激活工具和常用软件的高速安全下载服务。项目采用响应式设计，具备现代化UI和优化的用户体验。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/kaysarsoft/kaysarsoft.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.9.10"
+  }
+}
