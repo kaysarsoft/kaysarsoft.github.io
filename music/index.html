@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐解析工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .search-section {
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .method-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .method-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .method-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .result-section {
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .error {
+            background: #fee;
+            border-color: #fcc;
+            color: #c33;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #667eea;
+            font-style: italic;
+        }
+        
+        .params-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .param-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .param-item input {
+            flex: 1;
+        }
+        
+        .add-param {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 音乐解析工具</h1>
+        
+        <div class="search-section">
+            <div class="form-group">
+                <label for="search-input">音乐搜索关键词</label>
+                <input type="text" id="search-input" placeholder="请输入歌曲名称或歌手">
+            </div>
+            
+            <div class="params-section">
+                <h3>请求参数</h3>
+                <div class="param-item">
+                    <input type="text" class="param-key" placeholder="参数名" value="key1">
+                    <input type="text" class="param-value" placeholder="参数值" value="value1">
+                </div>
+                <div class="param-item">
+                    <input type="text" class="param-key" placeholder="参数名" value="key2">
+                    <input type="text" class="param-value" placeholder="参数值" value="value2">
+                </div>
+                <button type="button" class="add-param" onclick="addParam()">+ 添加参数</button>
+            </div>
+            
+            <div class="method-selector">
+                <button class="method-btn active" onclick="setMethod('GET')">GET请求</button>
+                <button class="method-btn" onclick="setMethod('POST')">POST请求</button>
+            </div>
+            
+            <button onclick="parseMusic()">开始解析</button>
+        </div>
+        
+        <div class="result-section">
+            <h2>解析结果</h2>
+            <div id="result" class="result">请点击上方按钮开始解析</div>
+        </div>
+    </div>
+    
+    <script>
+        // 使用 Fetch API 调用接口
+        const apiUrl = 'https://api.bugpk.com/api/music';
+        let currentMethod = 'GET';
+        
+        // 设置请求方法
+        function setMethod(method) {
+            currentMethod = method;
+            // 更新按钮状态
+            document.querySelectorAll('.method-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        // 添加参数行
+        function addParam() {
+            const paramsSection = document.querySelector('.params-section');
+            const newParam = document.createElement('div');
+            newParam.className = 'param-item';
+            newParam.innerHTML = `
+                <input type="text" class="param-key" placeholder="参数名">
+                <input type="text" class="param-value" placeholder="参数值">
+            `;
+            paramsSection.insertBefore(newParam, paramsSection.lastElementChild);
+        }
+        
+        // 获取所有参数
+        function getParams() {
+            const params = {};
+            const paramItems = document.querySelectorAll('.param-item');
+            paramItems.forEach(item => {
+                const key = item.querySelector('.param-key').value.trim();
+                const value = item.querySelector('.param-value').value.trim();
+                if (key) {
+                    params[key] = value;
+                }
+            });
+            // 添加搜索关键词到参数
+            const searchInput = document.getElementById('search-input').value.trim();
+            if (searchInput) {
+                params.keyword = searchInput;
+            }
+            return params;
+        }
+        
+        // GET 请求
+        async function getRequest() {
+            try {
+                const params = getParams();
+                const queryParams = new URLSearchParams(params).toString();
+                const url = `${apiUrl}?${queryParams}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('响应数据:', data);
+                return data;
+            } catch (error) {
+                console.error('请求失败:', error);
+                throw error;
+            }
+        }
+        
+        // POST 请求
+        async function postRequest() {
+            try {
+                const params = getParams();
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(params),
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('响应数据:', data);
+                return data;
+            } catch (error) {
+                console.error('请求失败:', error);
+                throw error;
+            }
+        }
+        
+        // 音乐解析主函数
+        async function parseMusic() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="loading">正在解析...请稍候</div>';
+            
+            try {
+                let data;
+                if (currentMethod === 'GET') {
+                    data = await getRequest();
+                } else if (currentMethod === 'POST') {
+                    data = await postRequest();
+                }
+                
+                // 格式化响应数据
+                const formattedData = JSON.stringify(data, null, 2);
+                resultDiv.className = 'result';
+                resultDiv.textContent = formattedData;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `解析失败: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
