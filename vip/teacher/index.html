@@ -4,239 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>全国教师管理系统各省入口官网</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: #1e88e5;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .provinces-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        
+        .province-link {
+            color: #333333;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        .province-link:hover {
+            color: #1e88e5;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #666666;
+        }
+        
+        .footer-links {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #666666;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer-links a:hover {
+            color: #1e88e5;
+        }
+        
+        .copyright {
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .provinces-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+            }
+            
+            .content {
+                padding: 40px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .provinces-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>全国教师管理系统各省入口官网</h1>
-            <p>提供全国各省份教师管理系统官网入口，方便教师快速访问</p>
-        </header>
-
+    <div class="header">
+        <h1>全国教师管理信息系统登录入口</h1>
+    </div>
+    
+    <div class="content">
         <div class="provinces-grid">
-            <!-- 华北地区 -->
-            <div class="province-card">
-                <h3>北京市</h3>
-                <p>北京市教师管理系统官网入口，提供教师注册、信息查询等服务。</p>
-                <p><strong>所属区域：</strong>华北</p>
-                <a href="https://teacher.bjedu.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>天津市</h3>
-                <p>天津市教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>华北</p>
-                <a href="https://teacher.tjedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>河北省</h3>
-                <p>河北省教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>华北</p>
-                <a href="https://teacher.hebeijiaoyu.com" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>山西省</h3>
-                <p>山西省教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>华北</p>
-                <a href="https://teacher.sxedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>内蒙古自治区</h3>
-                <p>内蒙古自治区教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>华北</p>
-                <a href="https://teacher.nmgjyt.gov.cn" target="_blank">访问官网</a>
-            </div>
+            <a href="https://teacher.bjedu.cn" target="_blank" class="province-link">北京</a>
+            <a href="https://teacher.gdedu.gov.cn" target="_blank" class="province-link">广东</a>
+            <a href="https://teacher.zjedu.gov.cn" target="_blank" class="province-link">浙江</a>
+            <a href="https://teacher.shanghaiedu.cn" target="_blank" class="province-link">上海</a>
+            <a href="https://teacher.jiangsuedu.com" target="_blank" class="province-link">江苏</a>
+            <a href="https://teacher.fjedu.gov.cn" target="_blank" class="province-link">福建</a>
+            <a href="https://teacher.sdedu.gov.cn" target="_blank" class="province-link">山东</a>
+            <a href="https://teacher.sxedu.gov.cn" target="_blank" class="province-link">山西</a>
             
-            <!-- 东北地区 -->
-            <div class="province-card">
-                <h3>辽宁省</h3>
-                <p>辽宁省教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>东北</p>
-                <a href="https://teacher.lnjy.com.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>吉林省</h3>
-                <p>吉林省教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>东北</p>
-                <a href="https://teacher.jledu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>黑龙江省</h3>
-                <p>黑龙江省教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>东北</p>
-                <a href="https://teacher.hljedu.gov.cn" target="_blank">访问官网</a>
-            </div>
+            <a href="https://teacher.jledu.gov.cn" target="_blank" class="province-link">吉林</a>
+            <a href="https://teacher.cqedu.cn" target="_blank" class="province-link">重庆</a>
+            <a href="https://teacher.hnedu.gov.cn" target="_blank" class="province-link">湖南</a>
+            <a href="https://teacher.hbedu.gov.cn" target="_blank" class="province-link">湖北</a>
+            <a href="https://teacher.hebeijiaoyu.com" target="_blank" class="province-link">河北</a>
+            <a href="https://teacher.haedu.gov.cn" target="_blank" class="province-link">河南</a>
+            <a href="https://teacher.scedu.net" target="_blank" class="province-link">四川</a>
+            <a href="https://teacher.ahjy.gov.cn" target="_blank" class="province-link">安徽</a>
             
-            <!-- 华东地区 -->
-            <div class="province-card">
-                <h3>上海市</h3>
-                <p>上海市教师管理系统官网入口，提供教师注册、信息查询等服务。</p>
-                <p><strong>所属区域：</strong>华东</p>
-                <a href="https://teacher.shanghaiedu.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>江苏省</h3>
-                <p>江苏省教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>华东</p>
-                <a href="https://teacher.jiangsuedu.com" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>浙江省</h3>
-                <p>浙江省教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>华东</p>
-                <a href="https://teacher.zjedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>安徽省</h3>
-                <p>安徽省教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>华东</p>
-                <a href="https://teacher.ahjy.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>福建省</h3>
-                <p>福建省教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>华东</p>
-                <a href="https://teacher.fjedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>江西省</h3>
-                <p>江西省教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>华东</p>
-                <a href="https://teacher.jxedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>山东省</h3>
-                <p>山东省教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>华东</p>
-                <a href="https://teacher.sdedu.gov.cn" target="_blank">访问官网</a>
-            </div>
+            <a href="https://teacher.gsedu.gov.cn" target="_blank" class="province-link">甘肃</a>
+            <a href="https://teacher.jxedu.gov.cn" target="_blank" class="province-link">江西</a>
+            <a href="https://teacher.gxedu.gov.cn" target="_blank" class="province-link">广西</a>
+            <a href="https://teacher.hainanedu.gov.cn" target="_blank" class="province-link">海南</a>
+            <a href="https://teacher.lnjy.com.cn" target="_blank" class="province-link">辽宁</a>
+            <a href="https://teacher.ynjy.cn" target="_blank" class="province-link">云南</a>
+            <a href="https://teacher.nxedu.gov.cn" target="_blank" class="province-link">宁夏</a>
+            <a href="https://teacher.snedu.gov.cn" target="_blank" class="province-link">陕西</a>
             
-            <!-- 华中地区 -->
-            <div class="province-card">
-                <h3>河南省</h3>
-                <p>河南省教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>华中</p>
-                <a href="https://teacher.haedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>湖北省</h3>
-                <p>湖北省教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>华中</p>
-                <a href="https://teacher.hbedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>湖南省</h3>
-                <p>湖南省教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>华中</p>
-                <a href="https://teacher.hnedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            
-            <!-- 华南地区 -->
-            <div class="province-card">
-                <h3>广东省</h3>
-                <p>广东省教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>华南</p>
-                <a href="https://teacher.gdedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>广西壮族自治区</h3>
-                <p>广西壮族自治区教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>华南</p>
-                <a href="https://teacher.gxedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>海南省</h3>
-                <p>海南省教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>华南</p>
-                <a href="https://teacher.hainanedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            
-            <!-- 西南地区 -->
-            <div class="province-card">
-                <h3>重庆市</h3>
-                <p>重庆市教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>西南</p>
-                <a href="https://teacher.cqedu.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>四川省</h3>
-                <p>四川省教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>西南</p>
-                <a href="https://teacher.scedu.net" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>贵州省</h3>
-                <p>贵州省教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>西南</p>
-                <a href="https://teacher.gzsjyt.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>云南省</h3>
-                <p>云南省教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>西南</p>
-                <a href="https://teacher.ynjy.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>西藏自治区</h3>
-                <p>西藏自治区教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>西南</p>
-                <a href="https://teacher.xzedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            
-            <!-- 西北地区 -->
-            <div class="province-card">
-                <h3>陕西省</h3>
-                <p>陕西省教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>西北</p>
-                <a href="https://teacher.snedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>甘肃省</h3>
-                <p>甘肃省教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>西北</p>
-                <a href="https://teacher.gsedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>青海省</h3>
-                <p>青海省教师管理系统官网入口，提供教师资格认证、职称评定等服务。</p>
-                <p><strong>所属区域：</strong>西北</p>
-                <a href="https://teacher.qhedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>宁夏回族自治区</h3>
-                <p>宁夏回族自治区教师管理系统官网入口，提供教师信息管理、继续教育等服务。</p>
-                <p><strong>所属区域：</strong>西北</p>
-                <a href="https://teacher.nxedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>新疆维吾尔自治区</h3>
-                <p>新疆维吾尔自治区教师管理系统官网入口，提供教师招聘、培训等服务。</p>
-                <p><strong>所属区域：</strong>西北</p>
-                <a href="https://teacher.xjedu.gov.cn" target="_blank">访问官网</a>
-            </div>
-            
-            <!-- 其他地区 -->
-            <div class="province-card">
-                <h3>台湾省</h3>
-                <p>台湾省教师管理系统官网入口，提供教师相关服务。</p>
-                <p><strong>所属区域：</strong>其他</p>
-                <a href="https://teacher.edu.tw" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>香港特别行政区</h3>
-                <p>香港特别行政区教师管理系统官网入口，提供教师相关服务。</p>
-                <p><strong>所属区域：</strong>其他</p>
-                <a href="https://teacher.edb.gov.hk" target="_blank">访问官网</a>
-            </div>
-            <div class="province-card">
-                <h3>澳门特别行政区</h3>
-                <p>澳门特别行政区教师管理系统官网入口，提供教师相关服务。</p>
-                <p><strong>所属区域：</strong>其他</p>
-                <a href="https://teacher.dsej.gov.mo" target="_blank">访问官网</a>
-            </div>
+            <a href="https://teacher.gzsjyt.gov.cn" target="_blank" class="province-link">贵州</a>
+            <a href="https://teacher.hljedu.gov.cn" target="_blank" class="province-link">黑龙江</a>
+            <a href="https://teacher.nmgjyt.gov.cn" target="_blank" class="province-link">内蒙古</a>
+            <a href="https://teacher.xjedu.gov.cn" target="_blank" class="province-link">新疆</a>
+            <a href="https://teacher.xzedu.gov.cn" target="_blank" class="province-link">西藏</a>
+            <a href="https://teacher.qhedu.gov.cn" target="_blank" class="province-link">青海</a>
+            <a href="https://teacher.tjedu.gov.cn" target="_blank" class="province-link">天津</a>
         </div>
-
+        
         <div class="footer">
-            <p>© 2026 全国教师管理系统各省入口官网 | 本网站仅提供入口链接，具体服务请访问各省份官方网站</p>
+            <div class="footer-links">
+                <a href="http://www.moe.gov.cn" target="_blank">中华人民共和国教育部政府门户网站</a>
+                <a href="http://www.neea.edu.cn" target="_blank">中国教育考试网</a>
+                <a href="http://www.qianqianyuwen.com" target="_blank">学前</a>
+            </div>
+            <div class="copyright">
+                © 2026 全国教师管理信息系统
+            </div>
         </div>
     </div>
 </body>
