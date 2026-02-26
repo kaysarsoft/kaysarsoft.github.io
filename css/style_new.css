@@ -2,24 +2,15 @@
 :root {
   --primary: #6c63ff;
   --primary-dark: #554cc7;
-  --primary-light: rgba(108, 99, 255, 0.1);
   --secondary: #ff6584;
-  --secondary-light: rgba(255, 101, 132, 0.1);
   --accent: #4facfe;
-  --accent-light: rgba(79, 172, 254, 0.1);
   --bg-gradient: linear-gradient(135deg, #1a1053, #120a2e);
   --card-bg: rgba(255, 255, 255, 0.05);
-  --card-bg-hover: rgba(255, 255, 255, 0.08);
   --text-primary: #ffffff;
   --text-secondary: #b8c0e0;
-  --text-muted: #8a94b8;
-  --border-radius: 16px;
-  --border-radius-sm: 8px;
+  --border-radius: 12px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.4);
-  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -40,7 +31,6 @@ body {
   padding: 2rem 1rem;
   overflow-x: hidden;
   position: relative;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* 背景装饰 */
@@ -51,9 +41,8 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.15) 0%, transparent 25%),
-              radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.15) 0%, transparent 25%),
-              radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.1) 0%, transparent 30%);
+  background: radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.1) 0%, transparent 20%),
+              radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.1) 0%, transparent 20%);
   z-index: -1;
   animation: float 15s ease-in-out infinite;
 }
@@ -64,55 +53,6 @@ body::before {
   }
   50% {
     transform: translateY(-20px) rotate(5deg);
-  }
-}
-
-/* 粒子背景效果 */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: rgba(108, 99, 255, 0.6);
-  border-radius: 50%;
-  animation: particle-float 6s ease-in-out infinite;
-}
-
-.particle:nth-child(2n) {
-  background: rgba(255, 101, 132, 0.6);
-  animation-delay: 2s;
-  animation-duration: 8s;
-}
-
-.particle:nth-child(3n) {
-  background: rgba(79, 172, 254, 0.6);
-  animation-delay: 4s;
-  animation-duration: 10s;
-}
-
-@keyframes particle-float {
-  0%, 100% {
-    transform: translateY(100vh) translateX(0) scale(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-10vh) translateX(100px) scale(1);
-    opacity: 0;
   }
 }
 
@@ -131,24 +71,16 @@ body::before {
 header {
   text-align: center;
   margin-bottom: 3rem;
-  padding: 3rem 2rem;
+  padding: 2rem 0;
   position: relative;
   background: rgba(255, 255, 255, 0.03);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   width: 100%;
   max-width: 900px;
   margin: 0 auto 3rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-  transition: var(--transition);
-}
-
-header:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
 }
 
 header::before {
@@ -158,19 +90,9 @@ header::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(255, 101, 132, 0.15));
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(255, 101, 132, 0.1));
   border-radius: var(--border-radius);
   z-index: -1;
-  animation: gradient-shift 8s ease-in-out infinite;
-}
-
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
 }
 
 header::after {
@@ -179,90 +101,31 @@ header::after {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
+  width: 150px;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   border-radius: 2px;
-  animation: line-pulse 3s ease-in-out infinite;
-}
-
-@keyframes line-pulse {
-  0%, 100% {
-    transform: translateX(-50%) scaleX(1);
-  }
-  50% {
-    transform: translateX(-50%) scaleX(1.2);
-  }
 }
 
 header .meng {
-  font-size: 3.2rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  letter-spacing: 2px;
-  text-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
-  animation: text-shine 3s ease-in-out infinite;
-}
-
-@keyframes text-shine {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+  letter-spacing: 1px;
+  text-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
 }
 
 header p {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
-  opacity: 0.9;
-  transition: var(--transition);
-}
-
-header:hover p {
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-/* 品牌标识 */
-.header-logo {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 2rem;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
-  animation: logo-float 3s ease-in-out infinite;
-}
-
-@keyframes logo-float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.header-logo::before {
-  content: '龙';
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* 内容区域样式 */
@@ -294,18 +157,17 @@ header:hover p {
 /* 链接样式 */
 .links-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
   justify-items: center;
-  margin-top: 2rem;
 }
 
 .link-card {
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--border-radius);
-  padding: 2rem;
+  padding: 1.5rem;
   width: 100%;
-  max-width: 380px;
+  max-width: 350px;
   transition: var(--transition);
   border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
@@ -313,8 +175,6 @@ header:hover p {
   align-items: center;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .link-card::before {
@@ -323,8 +183,8 @@ header:hover p {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   transform: translateX(-100%);
   transition: var(--transition);
 }
@@ -334,69 +194,53 @@ header:hover p {
 }
 
 .link-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow);
   border-color: var(--primary);
-  background: var(--card-bg-hover);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .link-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   border-color: var(--primary);
 }
 
 .link-card span {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  position: relative;
-  z-index: 1;
 }
 
 .link-card span::before {
   content: '';
   display: inline-block;
-  width: 12px;
-  height: 12px;
-  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
   border-radius: 50%;
-  margin-right: 12px;
-  box-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.8;
-  }
+  margin-right: 10px;
 }
 
 .link-card a {
   display: inline-block;
   background: linear-gradient(45deg, var(--primary), var(--primary-dark));
   color: white;
-  padding: 1rem 2.5rem;
+  padding: 0.8rem 2rem;
   border-radius: 50px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: var(--transition);
   text-align: center;
   width: 100%;
-  max-width: 220px;
+  max-width: 200px;
   border: none;
   position: relative;
   overflow: hidden;
   z-index: 1;
-  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
 }
 
 .link-card a::before {
@@ -406,69 +250,31 @@ header:hover p {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: all 0.6s ease;
   z-index: -1;
 }
 
 .link-card a:hover {
-  transform: scale(1.08);
-  box-shadow: 0 8px 25px rgba(108, 99, 255, 0.5);
-  background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
 }
 
 .link-card a:hover::before {
   left: 100%;
 }
 
-/* 卡片图标 */
-.card-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.2);
-}
-
-.card-icon::before {
-  content: '→';
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary);
-  transition: var(--transition);
-}
-
-.link-card:hover .card-icon {
-  transform: scale(1.1) rotate(10deg);
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-}
-
-.link-card:hover .card-icon::before {
-  color: white;
-  transform: rotate(-10deg);
-}
-
 /* 页脚样式 */
 footer {
   text-align: center;
-  padding: 2.5rem 0;
+  padding: 2rem 0;
   width: 100%;
   margin-top: auto;
   position: relative;
   background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  transition: var(--transition);
-}
-
-footer:hover {
-  background: rgba(255, 255, 255, 0.03);
 }
 
 footer::before {
@@ -477,18 +283,15 @@ footer::before {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-  border-radius: 2px;
-  animation: line-pulse 3s ease-in-out infinite;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
 }
 
 footer p {
   font-size: 1rem;
   color: var(--text-secondary);
-  margin: 0.8rem 0;
-  line-height: 1.5;
+  margin: 0.5rem 0;
 }
 
 footer p a {
@@ -496,7 +299,6 @@ footer p a {
   text-decoration: none;
   transition: var(--transition);
   position: relative;
-  font-weight: 500;
 }
 
 footer p a::after {
@@ -505,70 +307,17 @@ footer p a::after {
   bottom: -2px;
   left: 0;
   width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  height: 1px;
+  background: var(--secondary);
   transition: var(--transition);
-  border-radius: 1px;
 }
 
 footer p a:hover {
   color: var(--secondary);
-  transform: translateY(-1px);
 }
 
 footer p a:hover::after {
   width: 100%;
-}
-
-/* 页脚社交链接 */
-.footer-social {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.social-link {
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.social-link:hover {
-  transform: translateY(-3px);
-  background: var(--primary);
-  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
-}
-
-.social-link::before {
-  content: '●';
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-  transition: var(--transition);
-}
-
-.social-link:hover::before {
-  color: white;
-}
-
-/* 版权信息 */
-.copyright {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.copyright::before {
-  content: '©';
-  margin-right: 5px;
 }
 
 /* 响应式设计 */
