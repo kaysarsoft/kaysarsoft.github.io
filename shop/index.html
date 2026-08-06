@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#0056b3">
+    <title>夜狼小商城 - 专业的自助下单与发卡平台 | 代刷系统</title>
+    <meta name="description" content="夜狼小商城是一套专业的自助下单、代刷、发卡平台，支持多级分站、多社区对接、自动化运营，助力站长快速变现。">
+    <meta name="keywords" content="自助下单系统,代刷系统,发卡平台,分站系统,卡密销售,夜狼小商城">
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #6c63ff;
+            --accent-color: #00d4ff;
+            --text-color: #333;
+            --text-light: #666;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, #0056b3 0%, #6c63ff 100%);
+            --gradient-accent: linear-gradient(135deg, #00d4ff 0%, #6c63ff 100%);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #001d3d 0%, #0056b3 50%, #6c63ff 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(108, 99, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 86, 179, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, #fff 0%, #a8edea 50%, #fed6e3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.1) 0%, rgba(108, 99, 255, 0.1) 100%);
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--bg-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Modules Section */
+        .modules {
+            background: white;
+        }
+
+        .module-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            background: var(--bg-color);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .module-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-color);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .module-item:hover {
+            background: white;
+            border-color: rgba(0, 86, 179, 0.2);
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+
+        .module-icon {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .module-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .module-info p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .stat-item .plus {
+            font-size: 2rem;
+            vertical-align: top;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: var(--bg-color);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            background: var(--gradient);
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .cta-content p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            opacity: 0.7;
+            margin-top: 1rem;
+            line-height: 1.8;
+            max-width: 350px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* H5 触摸优化：增大点击区域、禁用文字选择 */
+        .btn,
+        .tab-btn,
+        .faq-question,
+        .nav-toggle,
+        .nav-menu a,
+        .social-links a,
+        .footer-column a {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            min-height: 44px;
+        }
+
+        .btn:active,
+        .tab-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* 防止移动端横向滚动 */
+        body {
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* 大屏 PC 优化 */
+        @media (min-width: 1400px) {
+            .container,
+            .nav-container,
+            .footer-container {
+                max-width: 1280px;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+        }
+
+        /* 平板适配 */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* H5 手机端适配 */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 64px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 0.5rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                max-height: calc(100vh - 64px);
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+
+            .nav-menu a {
+                padding: 0.8rem 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .nav-menu a::after {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+
+            .hero {
+                padding: 5rem 1.2rem 3rem;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3.5rem 1.2rem;
+            }
+
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+
+            .section-badge {
+                font-size: 0.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.7rem;
+                line-height: 1.3;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .features-grid,
+            .module-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .feature-card {
+                padding: 1.8rem 1.5rem;
+            }
+
+            .feature-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 1.6rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+
+            .module-tabs {
+                gap: 0.6rem;
+                margin-bottom: 2rem;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 0.5rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-btn {
+                padding: 0.7rem 1.3rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .module-item {
+                padding: 1.2rem;
+            }
+
+            .module-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .module-info h4 {
+                font-size: 1rem;
+            }
+
+            .module-info p {
+                font-size: 0.88rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .stat-item h3 {
+                font-size: 2.2rem;
+            }
+
+            .stat-item p {
+                font-size: 0.95rem;
+            }
+
+            .faq-list {
+                margin: 0;
+            }
+
+            .faq-question {
+                padding: 1.2rem 1.3rem;
+                font-size: 1rem;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 1.3rem 1.2rem;
+            }
+
+            .faq-answer p {
+                font-size: 0.92rem;
+            }
+
+            .cta-content {
+                padding: 2.5rem 1.5rem;
+                border-radius: 20px;
+            }
+
+            .cta-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .cta-content p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            footer {
+                padding: 3rem 1.2rem 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-brand p {
+                font-size: 0.9rem;
+            }
+
+            .footer-column h4 {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-column li {
+                margin-bottom: 0.6rem;
+            }
+
+            .footer-bottom {
+                font-size: 0.82rem;
+                padding-top: 1.5rem;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+        }
+
+        /* 小屏手机适配（375px 以下） */
+        @media (max-width: 375px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero p {
+                font-size: 0.92rem;
+            }
+
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.35rem 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .stat-item h3 {
+                font-size: 1.8rem;
+            }
+
+            .cta-content h2 {
+                font-size: 1.4rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .faq-question {
+                font-size: 0.95rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .btn {
+                font-size: 0.95rem;
+                padding: 0.85rem 1.8rem;
+            }
+
+            .logo span {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* 横屏适配 */
+        @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+            .hero {
+                min-height: auto;
+                padding: 5rem 1.5rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .nav-menu {
+                top: 56px;
+            }
+        }
+
+        /* 暗色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a2e;
+                --card-bg: #16213e;
+                --text-color: #e0e0e0;
+                --text-light: #a0a0a0;
+            }
+
+            .navbar {
+                background: rgba(26, 26, 46, 0.95);
+            }
+
+            .nav-menu a {
+                color: var(--text-color);
+            }
+
+            .feature-card,
+            .faq-item,
+            .modules {
+                background: var(--card-bg);
+            }
+
+            .module-item {
+                background: var(--bg-color);
+            }
+
+            .tab-btn {
+                background: var(--bg-color);
+                color: var(--text-color);
+            }
+        }
+
+        /* 降低动画偏好支持 */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .particle {
+                display: none;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* License 开源协议板块 */
+        .license {
+            background: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 100%);
+            color: white;
+        }
+
+        .license-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+        }
+
+        .license-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .license-header .section-badge {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent-color);
+        }
+
+        .license-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .license-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.05rem;
+        }
+
+        .repo-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .repo-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 1.8rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .repo-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .repo-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .repo-icon.gitee {
+            background: linear-gradient(135deg, #c71d23 0%, #e94f4f 100%);
+        }
+
+        .repo-icon.github {
+            background: linear-gradient(135deg, #24292e 0%, #586069 100%);
+        }
+
+        .repo-info h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .repo-info p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.65);
+            word-break: break-all;
+        }
+
+        .license-terms {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .license-terms h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .license-terms ul {
+            list-style: none;
+        }
+
+        .license-terms li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            font-size: 0.98rem;
+        }
+
+        .license-terms li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+
+        .license-terms li.allow::before {
+            background: #4ade80;
+        }
+
+        .license-terms li.deny::before {
+            background: #f87171;
+        }
+
+        .license-terms li.must::before {
+            background: #fbbf24;
+        }
+
+        .license-terms strong {
+            color: white;
+        }
+
+        .license-footer {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .license-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .license-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .license-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .repo-cards {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .repo-card {
+                padding: 1.3rem;
+            }
+
+            .repo-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.5rem;
+            }
+
+            .license-terms {
+                padding: 1.5rem;
+            }
+
+            .license-terms li {
+                font-size: 0.9rem;
+                padding-left: 1.8rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .license-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .repo-info h4 {
+                font-size: 1.05rem;
+            }
+
+            .repo-info p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="https://www.kaysar.top/shop" target="_blank" rel="noopener" class="logo">
+                <div class="logo-icon">☁</div>
+                <span>夜狼小商城</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#features">核心功能</a></li>
+                <li><a href="#modules">系统模块</a></li>
+                <li><a href="#stats">数据实力</a></li>
+                <li><a href="#faq">常见问题</a></li>
+                <li><a href="#license">开源协议</a></li>
+                <li><a href="https://www.kaysar.top/shop" target="_blank" rel="noopener">官网</a></li>
+                <li><a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener">Gitee</a></li>
+                <li><a href="https://github.com/kaysarsoft/shop" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">🚀 v1.0.0 正式版发布</div>
+            <h1>专业的自助下单<br>与发卡运营平台</h1>
+            <p>多站点管理 · 智能对接 · 高效运营<br>助力站长快速搭建自己的代刷、卡密销售业务</p>
+            <div class="hero-buttons">
+                <a href="https://www.kaysar.top/shop" target="_blank" rel="noopener" class="btn btn-primary">🌐 访问官网</a>
+                <a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener" class="btn btn-secondary">📦 Gitee 源码</a>
+                <a href="https://github.com/kaysarsoft/shop" target="_blank" rel="noopener" class="btn btn-secondary">⚡ GitHub 源码</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">核心优势</div>
+                <h2>全方位功能，满足业务所需</h2>
+                <p>从商品管理到自动化运营，夜狼小商城为您提供完整的一站式解决方案</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🏢</div>
+                    <h3>多级分站系统</h3>
+                    <p>支持主站-分站-子分站三级架构，分站可自主管理商品、订单与下级，独立绑定域名，实现快速规模化运营。</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🔗</div>
+                    <h3>多社区货源对接</h3>
+                    <p>支持玖伍、卡易信、卡商网、卡乐购、聚梦、时空云等主流社区，自动同步商品价格与订单转发。</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">⚡</div>
+                    <h3>自动化发卡</h3>
+                    <p>卡密库存管理、邮件自动发卡、订单实时通知，支持批量录入与自动监控，让发卡流程零人工干预。</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🎨</div>
+                    <h3>20+ 前台模板</h3>
+                    <p>内置 20 多套精美前台模板风格，一键切换，支持自定义 LOGO 与色彩，打造独特品牌形象。</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🔌</div>
+                    <h3>丰富插件生态</h3>
+                    <p>发红包、抽奖、打折、SEO 增强、动态分类、支付工具箱等插件，轻松扩展业务功能。</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>安全稳定可靠</h3>
+                    <p>360 安全防护、网站安全扫描、操作日志、极验/顶象验证码，全方位保障站点与资金安全。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="modules" id="modules">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">系统模块</div>
+                <h2>完善的功能体系</h2>
+                <p>覆盖后台管理、用户前台、API 接口、支付系统等全链路功能</p>
+            </div>
+            <div class="module-tabs animate-on-scroll">
+                <button class="tab-btn active" data-tab="admin">后台管理</button>
+                <button class="tab-btn" data-tab="user">用户前台</button>
+                <button class="tab-btn" data-tab="api">API 接口</button>
+                <button class="tab-btn" data-tab="pay">支付系统</button>
+            </div>
+
+            <div class="tab-content active" id="admin">
+                <div class="module-grid">
+                    <div class="module-item">
+                        <div class="module-icon">📋</div>
+                        <div class="module-info">
+                            <h4>订单管理</h4>
+                            <p>订单查询、导出、批量处理，密码字段控制</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🛒</div>
+                        <div class="module-info">
+                            <h4>商品管理</h4>
+                            <p>分类维护、商品上下架、加价模板、卡密库存</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🏬</div>
+                        <div class="module-info">
+                            <h4>分站管理</h4>
+                            <p>分站增删改、域名绑定、封禁管理、提成结算</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🔄</div>
+                        <div class="module-info">
+                            <h4>对接设置</h4>
+                            <p>多社区对接、价格监控、克隆站点、对接日志</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">⚙️</div>
+                        <div class="module-info">
+                            <h4>系统设置</h4>
+                            <p>站点配置、支付接口、邮件服务、数据清理</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">📝</div>
+                        <div class="module-info">
+                            <h4>文章与 SEO</h4>
+                            <p>文章发布、内链建设、栏目 SEO、百度收录优化</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">👥</div>
+                        <div class="module-info">
+                            <h4>员工管理</h4>
+                            <p>子账号创建、权限分配、操作审计</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🔒</div>
+                        <div class="module-info">
+                            <h4>安全中心</h4>
+                            <p>操作日志、风险扫描、文件安全检查</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="user">
+                <div class="module-grid">
+                    <div class="module-item">
+                        <div class="module-icon">🔑</div>
+                        <div class="module-info">
+                            <h4>快捷登录</h4>
+                            <p>账号密码、QQ 互联、扫码登录多种方式</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">💳</div>
+                        <div class="module-info">
+                            <h4>自助下单</h4>
+                            <p>商品浏览、下单购买、余额支付</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🔍</div>
+                        <div class="module-info">
+                            <h4>自助查单</h4>
+                            <p>订单状态实时查询，消费明细透明</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🏪</div>
+                        <div class="module-info">
+                            <h4>开通分站</h4>
+                            <p>一键开通下级分站，独立域名管理</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">✉️</div>
+                        <div class="module-info">
+                            <h4>每日签到</h4>
+                            <p>递增奖励签到，活跃用户留存</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">📣</div>
+                        <div class="module-info">
+                            <h4>推广奖励</h4>
+                            <p>邀请推广、分享商品，持续被动收入</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">📥</div>
+                        <div class="module-info">
+                            <h4>余额提现</h4>
+                            <p>在线申请提现，快速到账处理</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🎫</div>
+                        <div class="module-info">
+                            <h4>工单系统</h4>
+                            <p>提交工单、查看处理进度，贴心服务</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="api">
+                <div class="module-grid">
+                    <div class="module-item">
+                        <div class="module-icon">📦</div>
+                        <div class="module-info">
+                            <h4>clone 克隆接口</h4>
+                            <p>克隆分类/商品/社区/价格数据，密钥鉴权</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🛍️</div>
+                        <div class="module-info">
+                            <h4>tools 商品列表</h4>
+                            <p>获取商品列表，支持分页与数量限制</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">📑</div>
+                        <div class="module-info">
+                            <h4>orders 订单拉取</h4>
+                            <p>按商品 ID 拉取待处理订单，支持自动标记</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">💳</div>
+                        <div class="module-info">
+                            <h4>pay 自助下单</h4>
+                            <p>API 下单，含商品校验、黑名单、余额扣款</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🔎</div>
+                        <div class="module-info">
+                            <h4>search 订单搜索</h4>
+                            <p>订单搜索查询，支持多条件筛选</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🏷️</div>
+                        <div class="module-info">
+                            <h4>goodsdetails 商品详情</h4>
+                            <p>获取商品详细信息，含价格与描述</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="pay">
+                <div class="module-grid">
+                    <div class="module-item">
+                        <div class="module-icon">💙</div>
+                        <div class="module-info">
+                            <h4>支付宝</h4>
+                            <p>即时到账、当面付，稳定快捷</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">💚</div>
+                        <div class="module-info">
+                            <h4>微信支付</h4>
+                            <p>Native、JSAPI、H5 全场景支持</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">💛</div>
+                        <div class="module-info">
+                            <h4>QQ 钱包</h4>
+                            <p>QQ 支付通道，覆盖腾讯用户群体</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">🧧</div>
+                        <div class="module-info">
+                            <h4>码支付</h4>
+                            <p>聚合支付，一键接入多通道</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">💠</div>
+                        <div class="module-info">
+                            <h4>易支付</h4>
+                            <p>易支付接口，支持回调通知</p>
+                        </div>
+                    </div>
+                    <div class="module-item">
+                        <div class="module-icon">📱</div>
+                        <div class="module-info">
+                            <h4>微付通</h4>
+                            <p>微付通通道，移动端优化</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate-on-scroll">
+                    <h3><span class="counter" data-target="10000">0</span><span class="plus">+</span></h3>
+                    <p>服务站长</p>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <h3><span class="counter" data-target="5000000">0</span><span class="plus">+</span></h3>
+                    <p>累计订单</p>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <h3><span class="counter" data-target="99">0</span><span class="plus">.9%</span></h3>
+                    <p>系统可用性</p>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <h3><span class="counter" data-target="20">0</span><span class="plus">+</span></h3>
+                    <p>前台模板风格</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">常见问题</div>
+                <h2>您可能想知道</h2>
+                <p>关于夜狼小商城的一些常见问题解答</p>
+            </div>
+            <div class="faq-list animate-on-scroll">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>夜狼小商城适合哪些业务场景？</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>夜狼小商城适用于虚拟商品销售、代刷业务、卡密发卡、会员充值、游戏代练等多种场景。无论您是个人站长还是企业运营者，都可以通过夜狼小商城快速搭建属于自己的在线销售平台。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>系统支持哪些支付方式？</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>系统支持支付宝（即时到账/当面付）、微信支付（Native/JSAPI/H5）、QQ 钱包、码支付、易支付、微付通等多种支付通道，可独立配置三网支付，灵活满足不同需求。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>如何配置社区对接？支持哪些社区？</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>在后台「对接设置 - 对接站点管理」中添加社区账号即可。目前支持玖伍社区、卡易信、卡商网、卡乐购、聚梦、时空云以及同系统对接，商品价格会自动监控同步。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>分站系统是如何运作的？</span>
+                        <div class="faq-answer">
+                    </div>
+                    <div class="faq-answer">
+                        <p>夜狼小商城支持三级分站架构。主站可开通一级分站，一级分站可开通二级分站。每个分站拥有独立管理后台、独立域名、独立商品与订单，分站之间通过加价模板实现差异化定价，提成自动结算。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>系统的安全性如何保障？</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>夜狼小商城内置 360 Web 安全防护、网站安全扫描、顽固文件清理、操作日志记录、极验/顶象滑动验证码、黑名单机制等多重安全措施，全方位保障您的站点与资金安全。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>是否提供技术支持和更新服务？</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>系统提供在线版本更新检查，可一键升级到最新版本。同时拥有完善的插件生态和社区支持，遇到问题可通过工单系统、社区论坛等多渠道获取帮助。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <div class="cta-content animate-on-scroll">
+                <h2>立即开启您的自助下单业务</h2>
+                <p>注册账号，体验夜狼小商城带来的高效运营解决方案</p>
+                <div class="cta-buttons">
+                    <a href="https://www.kaysar.top/shop" target="_blank" rel="noopener" class="btn btn-primary">🌐 访问官网</a>
+                    <a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5);">📦 Gitee 源码</a>
+                    <a href="https://github.com/kaysarsoft/shop" target="_blank" rel="noopener" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5);">⚡ GitHub 源码</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- License Section -->
+    <section class="license" id="license">
+        <div class="container">
+            <div class="license-content animate-on-scroll">
+                <div class="license-header">
+                    <div class="section-badge">开源协议</div>
+                    <h2>GNU General Public License v3</h2>
+                    <p>夜狼小商城基于 <strong>GPL v3</strong> 协议开源，自由使用、修改与分发，衍生作品须同样开源</p>
+                </div>
+
+                <!-- 开源仓库地址 -->
+                <div class="repo-cards">
+                    <a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener" class="repo-card">
+                        <div class="repo-icon gitee">G</div>
+                        <div class="repo-info">
+                            <h4>Gitee 仓库</h4>
+                            <p>gitee.com/kaysarsoft/shop</p>
+                        </div>
+                    </a>
+                    <a href="https://github.com/kaysarsoft/shop" target="_blank" rel="noopener" class="repo-card">
+                        <div class="repo-icon github">⚡</div>
+                        <div class="repo-info">
+                            <h4>GitHub 仓库</h4>
+                            <p>github.com/kaysarsoft/shop</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 协议条款 -->
+                <div class="license-terms">
+                    <h3>📜 GPL v3 协议核心条款</h3>
+                    <ul>
+                        <li class="allow"><strong>自由运行：</strong>任何人可以出于任何目的自由运行本程序，包括商业用途与非商业用途。</li>
+                        <li class="allow"><strong>自由研究：</strong>任何人可以研究本程序的运行机制，并根据需要自由修改、扩展源代码。</li>
+                        <li class="allow"><strong>自由分发：</strong>任何人可以自由分发本程序副本，以便帮助他人。</li>
+                        <li class="allow"><strong>自由改进：</strong>任何人可以自由改进程序，并向公众发布改进版本，使全社会受益。</li>
+                        <li class="must"><strong>开源传染：</strong>基于本系统修改或衍生的作品，<strong>必须以 GPL v3 协议继续开源发布</strong>，不得闭源。</li>
+                        <li class="must"><strong>提供源码：</strong>分发本程序或衍生作品时，必须<strong>同时提供完整的源代码</strong>，或书面承诺以不高于分发成本的价格提供。</li>
+                        <li class="must"><strong>保留版权：</strong>必须保留原作者的版权声明、GPL 协议声明及免责条款，不得删除或篡改。</li>
+                        <li class="must"><strong>标注修改：</strong>对源代码进行修改后，必须在分发时<strong>明确标注修改的内容、位置、修改时间及修改者</strong>。</li>
+                        <li class="must"><strong>注明出处：</strong>基于本系统二次开发或部署的项目，须在显著位置标注<strong>「Powered by 夜狼小商城」</strong>及原作者开源仓库地址。</li>
+                        <li class="deny"><strong>无担保：</strong>本程序不提供任何担保，作者不对程序的使用后果承担任何法律责任。除非适用法律另有规定或以书面形式另有约定。</li>
+                    </ul>
+                </div>
+
+                <div class="license-footer">
+                    <p>完整协议文本请参阅 <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GNU GPL v3 官方文档</a></p>
+                    <p style="margin-top: 0.5rem;">
+                        官方网站：<a href="https://www.kaysar.top/shop" target="_blank" rel="noopener">www.kaysar.top/shop</a> ·
+                        开源地址：<a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener">Gitee</a> ·
+                        <a href="https://github.com/kaysarsoft/shop" target="_blank" rel="noopener">GitHub</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="https://www.kaysar.top/shop" target="_blank" rel="noopener" class="logo" style="color: white;">
+                        <div class="logo-icon">☁</div>
+                        <span>夜狼小商城</span>
+                    </a>
+                    <p>夜狼小商城自助下单系统，专业的多站点代刷与发卡运营平台，致力于为站长提供高效、稳定、安全的一站式解决方案。</p>
+                    <div class="social-links">
+                        <a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener" title="Gitee">G</a>
+                        <a href="https://github.com/kaysarsoft/shop" target="_blank" rel="noopener" title="GitHub">⚡</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>产品功能</h4>
+                    <ul>
+                        <li><a href="#features">核心功能</a></li>
+                        <li><a href="#modules">系统模块</a></li>
+                        <li><a href="#stats">数据实力</a></li>
+                        <li><a href="#faq">常见问题</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>开源仓库</h4>
+                    <ul>
+                        <li><a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener">Gitee 仓库</a></li>
+                        <li><a href="https://github.com/kaysarsoft/shop" target="_blank" rel="noopener">GitHub 仓库</a></li>
+                        <li><a href="#license">开源协议</a></li>
+                        <li><a href="#">更新日志</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><a href="https://www.kaysar.top/shop" target="_blank" rel="noopener">官方网站</a></li>
+                        <li><a href="#">合作咨询</a></li>
+                        <li><a href="#">商务授权</a></li>
+                        <li><a href="#">技术支持</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 夜狼小商城 XiangYun System. Powered by <a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener" style="color: var(--accent-color); text-decoration: none;">夜狼小商城开源</a> · GPL v3 开源协议 ·
+                <a href="https://www.kaysar.top/shop" target="_blank" rel="noopener" style="color: var(--accent-color); text-decoration: none;">官网</a> ·
+                <a href="https://gitee.com/kaysarsoft/shop" target="_blank" rel="noopener" style="color: var(--accent-color); text-decoration: none;">Gitee</a> /
+                <a href="https://github.com/kaysarsoft/shop" target="_blank" rel="noopener" style="color: var(--accent-color); text-decoration: none;">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Module Tabs
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.dataset.tab;
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                faqItems.forEach(i => i.classList.remove('active'));
+
+                // Open clicked item (if it wasn't active)
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Animated Counter
+        const counters = document.querySelectorAll('.counter');
+        let countersStarted = false;
+
+        function startCounters() {
+            if (countersStarted) return;
+            countersStarted = true;
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.target);
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current).toLocaleString();
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target.toLocaleString();
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+
+        // Scroll Animations
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.closest('.stats')) {
+                        startCounters();
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Generate Particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            const size = Math.random() * 8 + 2;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = Math.random() * 15;
+            const duration = Math.random() * 10 + 10;
+
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = left + '%';
+            particle.style.top = top + '%';
+            particle.style.animationDelay = delay + 's';
+            particle.style.animationDuration = duration + 's';
+
+            particlesContainer.appendChild(particle);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
