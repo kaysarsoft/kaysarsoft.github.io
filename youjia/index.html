@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>油价查询_今日92号95号汽油价格_下一次调价时间与油价趋势 - 夜狼电子商务团队</title>
+<meta name="keywords" content="油价查询,今日油价,92号汽油价格,95号汽油价格,0号柴油价格,油价调整时间,下一次调价,油价趋势,各省油价">
+<meta name="description" content="油价查询工具：实时倒计时显示下一次油价调整时间，查看全国各省92号、95号汽油及0号柴油最新价格、历史调价记录与油价走势趋势图。">
+<meta name="googlebot" content="index,follow">
+<meta name="bingbot" content="index,follow">
+<meta name="baidu_spider" content="index,follow">
+<link rel="shortcut icon" href="https://pic.imgdb.cn/item/66449ed60ea9cb1403009d90.png">
+<style>
+:root{
+  --bg-1:#120a2e;
+  --bg-2:#1a1053;
+  --card:rgba(255,255,255,.05);
+  --card-2:rgba(255,255,255,.03);
+  --line:rgba(255,255,255,.08);
+  --text:#ffffff;
+  --muted:#b8c0e0;
+  --primary:#6c63ff;
+  --primary-2:#8f88ff;
+  --oil:#ffb347;
+  --oil-2:#ff7a18;
+  --up:#ff5a5f;
+  --down:#22c55e;
+  --flat:#94a3b8;
+  --radius:16px;
+  --shadow:0 14px 40px rgba(0,0,0,.32);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'PingFang SC','Microsoft YaHei','Segoe UI',Tahoma,sans-serif;
+  background:linear-gradient(160deg,var(--bg-2),var(--bg-1) 55%,#0d0722);
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(108,99,255,.18),transparent 32%),
+    radial-gradient(circle at 88% 14%,rgba(255,122,24,.10),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(108,99,255,.10),transparent 40%);
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 40px;}
+
+/* 顶部导航 */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:22px 0;flex-wrap:wrap;
+}
+.brand{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--text);text-decoration:none;font-weight:600;font-size:17px;letter-spacing:.5px;
+}
+.brand .dot{
+  width:12px;height:12px;border-radius:50%;
+  background:linear-gradient(135deg,var(--oil),var(--oil-2));
+  box-shadow:0 0 14px rgba(255,179,71,.7);
+}
+.topbar nav{display:flex;gap:6px;flex-wrap:wrap;}
+.topbar nav a{
+  color:var(--muted);text-decoration:none;font-size:14px;
+  padding:7px 14px;border-radius:999px;transition:.25s;
+}
+.topbar nav a:hover{color:#fff;background:rgba(255,255,255,.07);}
+
+/* 标题区 */
+.hero{padding:26px 0 30px;}
+.eyebrow{
+  font-size:12px;letter-spacing:3px;color:var(--oil);
+  text-transform:uppercase;margin-bottom:12px;font-weight:600;
+}
+.hero h1{
+  font-size:clamp(26px,4vw,42px);line-height:1.25;font-weight:700;
+  background:linear-gradient(95deg,#fff 20%,#cfc9ff 55%,var(--oil) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{margin-top:14px;color:var(--muted);max-width:640px;font-size:15px;}
+
+/* 通用卡片 */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  margin-bottom:26px;
+}
+.section{margin-bottom:26px;}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;margin-bottom:18px;
+}
+.section-head h2{font-size:19px;font-weight:600;letter-spacing:.5px;}
+.section-head h2::before{
+  content:'';display:inline-block;width:4px;height:18px;border-radius:2px;
+  background:linear-gradient(180deg,var(--oil),var(--oil-2));
+  vertical-align:-3px;margin-right:10px;
+}
+.section-note{font-size:13px;color:var(--muted);}
+.section-note em{font-style:normal;color:var(--oil);}
+.section-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+
+/* 下拉选择 */
+.select{
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;
+  font-family:inherit;font-size:13.5px;color:#fff;cursor:pointer;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--line);border-radius:999px;
+  padding:7px 34px 7px 16px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b8c0e0' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;background-position:right 13px center;
+  transition:.22s;
+}
+.select:hover{border-color:rgba(255,255,255,.25);}
+.select:focus{outline:none;border-color:rgba(255,179,71,.55);}
+.select option{background:#1a1053;color:#fff;}
+
+/* 倒计时卡片 */
+.countdown{
+  display:grid;grid-template-columns:1.25fr 1fr;gap:26px;
+  border-color:rgba(255,179,71,.22);
+  background:
+    linear-gradient(135deg,rgba(255,179,71,.12),rgba(108,99,255,.06) 45%,rgba(255,255,255,.03)),
+    var(--card);
+}
+.cd-label{font-size:13px;color:var(--oil);letter-spacing:2px;font-weight:600;}
+.cd-date{
+  font-size:clamp(24px,3.2vw,34px);font-weight:700;margin:8px 0 6px;
+  letter-spacing:1px;
+}
+.cd-meta{font-size:13px;color:var(--muted);margin-bottom:20px;}
+.timer{display:flex;gap:12px;}
+.t-block{
+  min-width:74px;flex:1;max-width:96px;text-align:center;
+  background:rgba(0,0,0,.22);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:10px 6px;
+}
+.t-block b{
+  display:block;font-size:clamp(22px,3vw,30px);font-weight:700;
+  font-variant-numeric:tabular-nums;
+  background:linear-gradient(180deg,#fff,#ffd9a0);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.t-block span{font-size:12px;color:var(--muted);}
+.cd-right{
+  border-left:1px solid var(--line);padding-left:26px;
+  display:flex;flex-direction:column;
+}
+.cd-side-title{font-size:13px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;}
+.upcoming{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.upcoming li{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 14px;border-radius:10px;font-size:14px;
+  background:rgba(255,255,255,.04);
+}
+.upcoming li.first{
+  background:linear-gradient(90deg,rgba(255,179,71,.18),rgba(255,179,71,.02));
+  border:1px solid rgba(255,179,71,.35);
+}
+.upcoming li span{color:var(--muted);font-size:12.5px;}
+.upcoming li b{font-variant-numeric:tabular-nums;font-weight:600;}
+.cd-tip{margin-top:auto;padding-top:16px;font-size:12px;color:#8b93b8;line-height:1.7;}
+
+/* 价格卡片 */
+.price-grid{
+  display:grid;gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(232px,1fr));
+}
+.price-card{
+  position:relative;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:20px;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.price-card::before{
+  content:'';position:absolute;left:0;top:0;right:0;height:3px;
+  background:var(--grade,var(--oil));
+  opacity:.9;
+}
+.price-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 34px rgba(0,0,0,.35);
+  border-color:rgba(255,255,255,.2);
+}
+.pc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.pc-name{font-size:14px;color:var(--muted);}
+.pc-tag{
+  font-size:12px;font-weight:600;letter-spacing:1px;
+  padding:3px 10px;border-radius:999px;
+  color:var(--grade);
+  background:rgba(255,255,255,.07);
+}
+.pc-value{
+  font-size:38px;font-weight:700;line-height:1.1;
+  font-variant-numeric:tabular-nums;
+}
+.pc-value small{font-size:13px;font-weight:400;color:var(--muted);margin-left:6px;}
+.pc-change{margin-top:10px;font-size:13.5px;font-weight:600;}
+.pc-change.up{color:var(--up);}
+.pc-change.down{color:var(--down);}
+.pc-change.flat{color:var(--flat);}
+.pc-date{margin-top:6px;font-size:12px;color:#8b93b8;}
+
+/* 数据状态 */
+.data-status{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-top:16px;font-size:12.5px;color:#8b93b8;
+}
+.data-status .live{
+  width:7px;height:7px;border-radius:50%;background:var(--down);
+  box-shadow:0 0 9px var(--down);animation:pulse 1.8s infinite;
+}
+.data-status.error{color:#ffb4b6;}
+.data-status.error .live{background:var(--up);box-shadow:0 0 9px var(--up);}
+.retry{
+  font-family:inherit;cursor:pointer;font-size:12.5px;
+  color:var(--oil);background:rgba(255,179,71,.12);
+  border:1px solid rgba(255,179,71,.4);
+  border-radius:999px;padding:5px 15px;transition:.2s;
+}
+.retry:hover{background:rgba(255,179,71,.22);}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.82);}}
+
+/* 标签按钮 */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;}
+.tab,.chip{
+  font-family:inherit;cursor:pointer;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  color:var(--muted);
+  border-radius:999px;
+  padding:6px 15px;font-size:13px;
+  transition:.22s;
+}
+.tab:hover,.chip:hover{color:#fff;border-color:rgba(255,255,255,.25);}
+.tab.active,.chip.active{
+  color:#1a1030;
+  background:linear-gradient(135deg,var(--oil),var(--oil-2));
+  border-color:transparent;font-weight:600;
+}
+.chart-toolbar{display:flex;justify-content:flex-end;margin-bottom:8px;}
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+
+/* 图表 */
+.chart-wrap{position:relative;width:100%;}
+#chart{width:100%;height:auto;display:block;touch-action:pan-y;}
+.chart-empty{
+  display:flex;align-items:center;justify-content:center;
+  height:260px;color:#8b93b8;font-size:14px;
+}
+.chart-tip{
+  position:absolute;pointer-events:none;opacity:0;
+  transform:translate(-50%,-112%);
+  background:rgba(16,10,40,.95);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;padding:9px 13px;
+  font-size:12.5px;white-space:nowrap;
+  box-shadow:0 10px 24px rgba(0,0,0,.45);
+  transition:opacity .15s;
+  z-index:5;
+}
+.chart-tip b{font-size:14px;font-variant-numeric:tabular-nums;}
+.chart-tip .tip-date{color:var(--muted);font-size:12px;margin-bottom:2px;}
+.stats{
+  display:grid;gap:14px;margin-top:20px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+}
+.stat{
+  background:var(--card-2);border:1px solid var(--line);
+  border-radius:12px;padding:14px 16px;
+}
+.stat .k{font-size:12.5px;color:var(--muted);margin-bottom:6px;}
+.stat .v{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;}
+.stat .v.up{color:var(--up);}
+.stat .v.down{color:var(--down);}
+.stat .s{font-size:12px;color:#8b93b8;margin-top:2px;}
+
+/* 历史表格 */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+table{width:100%;border-collapse:collapse;min-width:620px;font-size:14px;}
+thead th{
+  text-align:left;font-weight:500;color:var(--muted);font-size:12.5px;
+  letter-spacing:1px;padding:13px 16px;
+  background:rgba(255,255,255,.045);
+  position:sticky;top:0;white-space:nowrap;
+}
+tbody td{
+  padding:13px 16px;border-top:1px solid rgba(255,255,255,.055);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+tbody tr:hover{background:rgba(255,255,255,.035);}
+tbody td:first-child{color:#dfe3ff;}
+.delta{font-weight:600;font-variant-numeric:tabular-nums;}
+.delta.up{color:var(--up);}
+.delta.down{color:var(--down);}
+.delta.flat{color:var(--flat);}
+.pill{
+  display:inline-block;padding:2px 10px;border-radius:999px;
+  font-size:12px;font-weight:600;
+}
+.pill.up{color:#ffb4b6;background:rgba(255,90,95,.16);}
+.pill.down{color:#9ef0bb;background:rgba(34,197,94,.15);}
+.pill.flat{color:#c3cad8;background:rgba(148,163,184,.16);}
+.more-wrap{text-align:center;margin-top:18px;}
+.more{
+  font-family:inherit;cursor:pointer;
+  background:transparent;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;
+  padding:9px 26px;font-size:13.5px;transition:.22s;
+}
+.more:hover{color:#fff;border-color:rgba(255,179,71,.5);}
+.empty{padding:28px;text-align:center;color:var(--muted);font-size:14px;}
+
+/* 说明 */
+.notice h2{font-size:17px;font-weight:600;margin-bottom:12px;}
+.notice h2::before{
+  content:'';display:inline-block;width:4px;height:16px;border-radius:2px;
+  background:linear-gradient(180deg,var(--oil),var(--oil-2));
+  vertical-align:-2px;margin-right:9px;
+}
+.notice ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.notice li{
+  position:relative;padding-left:16px;
+  font-size:13.5px;color:var(--muted);line-height:1.8;
+}
+.notice li::before{
+  content:'';position:absolute;left:0;top:11px;
+  width:5px;height:5px;border-radius:50%;background:rgba(255,179,71,.75);
+}
+.notice code{
+  font-family:Consolas,Monaco,monospace;font-size:12.5px;
+  color:var(--oil);background:rgba(255,179,71,.1);
+  padding:1px 6px;border-radius:5px;
+}
+
+/* 页脚 */
+footer{text-align:center;padding:26px 0 10px;color:#8b93b8;font-size:13px;}
+footer p{margin:5px 0;}
+footer a{color:var(--primary-2);text-decoration:none;transition:.2s;}
+footer a:hover{color:var(--oil);}
+
+/* 响应式 */
+@media (max-width:860px){
+  .countdown{grid-template-columns:1fr;gap:20px;}
+  .cd-right{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:18px;}
+  .card{padding:20px;}
+  .pc-value{font-size:33px;}
+  .t-block{min-width:0;}
+}
+@media (max-width:600px){
+  .card{padding:18px;}
+  .section-note{font-size:12px;}
+  .section-actions{gap:8px;}
+  .select{padding:6px 30px 6px 13px;font-size:13px;}
+  .tabs{gap:6px;}
+  .tab,.chip{padding:5px 12px;font-size:12.5px;}
+  .chart-empty{height:200px;}
+  .chart-tip{font-size:12px;padding:7px 11px;}
+  table{min-width:520px;font-size:13px;}
+  thead th{padding:11px 12px;font-size:12px;}
+  tbody td{padding:11px 12px;}
+  .data-status{font-size:12px;}
+  .price-grid{gap:14px;}
+}
+@media (max-width:480px){
+  .wrap{padding:0 14px 30px;}
+  .timer{gap:8px;}
+  .t-block{border-radius:10px;padding:8px 4px;}
+  .section-head h2{font-size:17px;}
+  .hero{padding:16px 0 22px;}
+  .topbar{padding:16px 0;}
+  .topbar nav a{padding:6px 10px;font-size:13px;}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero,.countdown,.section,.card{animation:fadeIn .6s ease both;}
+.countdown{animation-delay:.06s;}
+.section{animation-delay:.12s;}
+#trend{animation-delay:.18s;}
+#history{animation-delay:.24s;}
+.notice{animation-delay:.3s;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <a class="brand" href="../index.html"><span class="dot"></span>夜狼电子商务团队</a>
+    <nav>
+      <a href="#next">调价倒计时</a>
+      <a href="#today">今日油价</a>
+      <a href="#trend">油价趋势</a>
+      <a href="#history">历史调价</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Oil Price · 油价查询</p>
+      <h1>今日油价与下一次调价倒计时</h1>
+      <p class="hero-sub">全国 31 个省级行政区实时油价，数据来自公开油价接口；调价窗口按每 10 个工作日推算，页面自动倒计时并展示历史调价与价格走势。</p>
+    </section>
+
+    <section class="countdown card" id="next">
+      <div class="cd-left">
+        <p class="cd-label">下一次油价调整</p>
+        <h2 class="cd-date" id="cdDate">--</h2>
+        <p class="cd-meta" id="cdMeta">--</p>
+        <div class="timer" aria-live="polite">
+          <div class="t-block"><b id="tD">--</b><span>天</span></div>
+          <div class="t-block"><b id="tH">--</b><span>时</span></div>
+          <div class="t-block"><b id="tM">--</b><span>分</span></div>
+          <div class="t-block"><b id="tS">--</b><span>秒</span></div>
+        </div>
+      </div>
+      <div class="cd-right">
+        <p class="cd-side-title">后续调价窗口</p>
+        <ul class="upcoming" id="upcoming"></ul>
+        <p class="cd-tip">调价窗口以接口返回的最新调价记录为起点，按每 10 个工作日动态推算（已扣除周末与法定节假日），最终以国家发改委公告为准。</p>
+      </div>
+    </section>
+
+    <section class="section" id="today">
+      <div class="section-head">
+        <h2>今日油价</h2>
+        <div class="section-actions">
+          <span class="section-note">调价后基准价 · 数据日期 <em id="updatedAt">--</em></span>
+          <select class="select" id="provSelect" aria-label="选择省份"></select>
+        </div>
+      </div>
+      <div class="price-grid" id="priceGrid"></div>
+      <div class="data-status" id="dataStatus"><span class="live"></span><span id="statusText">正在获取最新油价…</span></div>
+    </section>
+
+    <section class="card" id="trend">
+      <div class="section-head">
+        <h2>油价趋势</h2>
+        <div class="tabs" id="seriesTabs">
+          <button type="button" class="tab active" data-key="p92">92#汽油</button>
+          <button type="button" class="tab" data-key="p95">95#汽油</button>
+          <button type="button" class="tab" data-key="p0">0#柴油</button>
+        </div>
+      </div>
+      <div class="chart-toolbar">
+        <div class="chips" id="rangeChips">
+          <button type="button" class="chip" data-months="3">近3个月</button>
+          <button type="button" class="chip" data-months="6">近6个月</button>
+          <button type="button" class="chip active" data-months="12">近1年</button>
+          <button type="button" class="chip" data-months="0">全部</button>
+        </div>
+      </div>
+      <div class="chart-wrap" id="chartWrap">
+        <svg id="chart" role="img" aria-label="油价走势趋势图"></svg>
+        <div class="chart-tip" id="chartTip"></div>
+        <div class="chart-empty" id="chartEmpty">数据加载中…</div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </section>
+
+    <section class="card" id="history">
+      <div class="section-head">
+        <h2>历史调价记录</h2>
+        <div class="chips" id="filterChips">
+          <button type="button" class="chip active" data-f="all">全部</button>
+          <button type="button" class="chip" data-f="up">上调</button>
+          <button type="button" class="chip" data-f="down">下调</button>
+          <button type="button" class="chip" data-f="flat">搁浅</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>调价日期（生效）</th>
+              <th>92# 汽油</th>
+              <th>95# 汽油</th>
+              <th>0# 柴油</th>
+              <th>涨跌(92#)</th>
+              <th>方向</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody">
+            <tr><td colspan="6" class="empty">数据加载中…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="more-wrap"><button type="button" class="more" id="moreBtn" style="display:none">展开全部</button></div>
+    </section>
+
+    <section class="card notice">
+      <h2>数据说明</h2>
+      <ul>
+        <li>今日油价来自公开油价接口（api.ruseo.cn），历史调价数据来自东方财富数据中心，均为各省级行政区调价后的基准零售价，仅供出行参考。</li>
+        <li>国内成品油价格每 10 个工作日为一个调价周期，测算调价幅度不足 50 元/吨时本轮不作调整（搁浅），价格一般于调价日 24 时起执行。</li>
+        <li>调价窗口以接口返回的最新一次调价为起点，按 10 个工作日规则动态推算（历史接口异常时使用内置日历兜底），节假日顺延可能与实际公告相差 1-2 天。</li>
+        <li>页面每 10 分钟自动刷新一次行情；接口偶发不可用时会自动切换备用数据源，若均失败可点击「重新加载」重试。实际价格请以国家发改委及各省发改委公布为准。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2019-<span id="year"></span> 夜狼电子商务团队 · <a href="../index.html">返回首页</a></p>
+    <p><a href="https://icp.gov.moe/?keyword=20240167" target="_blank" rel="noopener">萌ICP备20240167号</a></p>
+  </footer>
+</div>
+
+<script>
+/* =========================================================================
+ * 数据源
+ * 1. 今日油价（全国 31 省）：https://api.ruseo.cn/api/oilprice
+ * 2. 历史调价数据（按省，JSONP）：东方财富数据中心 RPTA_WEB_YJ_JH
+ * 3. 调价窗口：2026 年官方调价日历 + 每 10 个工作日推算
+ * ========================================================================= */
+var API_CURRENT = 'https://api.ruseo.cn/api/oilprice';
+var API_HISTORY = 'https://datacenter-web.eastmoney.com/api/data/v1/get';
+
+/* 2026 年官方调价窗口（历史接口异常时的兜底日历） */
+var WINDOWS_2026 = [
+  '2026-01-06','2026-01-20','2026-02-03','2026-02-24','2026-03-09','2026-03-23',
+  '2026-04-07','2026-04-21','2026-05-08','2026-05-21','2026-06-04','2026-06-18',
+  '2026-07-03','2026-07-17','2026-07-31','2026-08-14','2026-08-28','2026-09-11',
+  '2026-09-24','2026-10-15','2026-10-29','2026-11-12','2026-11-26','2026-12-10','2026-12-24'
+];
+
+/* 法定节假日（调价窗口推算用，可按国务院公告增补） */
+var HOLIDAYS = [
+  '2026-01-01','2026-01-02','2026-01-03',
+  '2026-02-16','2026-02-17','2026-02-18','2026-02-19','2026-02-20','2026-02-21','2026-02-22',
+  '2026-04-04','2026-04-05','2026-04-06',
+  '2026-05-01','2026-05-02','2026-05-03','2026-05-04','2026-05-05',
+  '2026-06-19','2026-06-20','2026-06-21',
+  '2026-09-25','2026-09-26','2026-09-27',
+  '2026-10-01','2026-10-02','2026-10-03','2026-10-04','2026-10-05','2026-10-06','2026-10-07',
+  '2027-01-01','2027-01-02','2027-01-03',
+  '2027-02-05','2027-02-06','2027-02-07','2027-02-08','2027-02-09','2027-02-10','2027-02-11'
+];
+
+var PROVINCES = [
+  '北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽',
+  '福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南',
+  '西藏','陕西','甘肃','青海','宁夏','新疆'
+];
+
+/* ========================= 基础工具 ========================= */
+function pad(n){ return n < 10 ? '0' + n : '' + n; }
+function round2(n){ return Math.round(n * 100) / 100; }
+function fmtDate(d){ return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+function parseDate(s){ var a = s.split('-').map(Number); return new Date(a[0], a[1] - 1, a[2]); }
+function weekdayCN(d){ return '星期' + '日一二三四五六'.charAt(d.getDay()); }
+function signed(n){ return (n > 0 ? '+' : '') + n.toFixed(2); }
+function dirOf(n){ return n > 0.004 ? 'up' : (n < -0.004 ? 'down' : 'flat'); }
+
+var HOLIDAY_SET = {};
+HOLIDAYS.forEach(function(h){ HOLIDAY_SET[h] = true; });
+
+/* 省份名称归一化："广西壮族自治区" -> "广西" */
+function normalizeProv(name){
+  return String(name || '')
+    .replace(/\s/g, '')
+    .replace(/(特别行政区|自治区|省|市)/g, '')
+    .replace(/(壮族|回族|维吾尔)/g, '');
+}
+
+/* ========================= 全局状态 ========================= */
+var state = {
+  prov: '新疆',
+  currentAll: [],   /* 接口返回的全部省份最新价格 */
+  current: null,    /* 当前省份最新价格 */
+  history: [],      /* 当前省份历史调价（按时间升序） */
+  priceErr: '',
+  historyErr: ''
+};
+
+var TODAY = new Date();
+TODAY.setHours(0, 0, 0, 0);
+
+/* ========================= 调价窗口推算 ========================= */
+function isWorkday(d){
+  var w = d.getDay();
+  return w !== 0 && w !== 6 && !HOLIDAY_SET[fmtDate(d)];
+}
+function addWorkdays(d, n){
+  var c = new Date(d.getTime());
+  var k = 0;
+  while (k < n) {
+    c.setDate(c.getDate() + 1);
+    if (isWorkday(c)) k++;
+  }
+  return c;
+}
+function effectiveTime(dateStr){
+  var d = parseDate(dateStr);
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 0, 0, 0);
+}
+
+var UPCOMING = [];
+/* 下一次调价窗口：以接口返回的最新调价记录为锚点，按 10 个工作日动态推算 */
+function buildUpcoming(){
+  var now = new Date();
+  var list = [];
+  var latest = latestRecord();
+
+  if (latest) {
+    var anchor = parseDate(latest.date);
+    anchor.setDate(anchor.getDate() - 1);   /* 生效日 -> 调价窗口日 */
+    var cursor = anchor;
+    var guard = 0;
+    while (list.length < 4 && guard < 40) {
+      if (effectiveTime(fmtDate(cursor)) > now) list.push(cursor);
+      cursor = addWorkdays(cursor, 10);
+      guard++;
+    }
+  }
+
+  /* 历史接口不可用时，退回 2026 年官方调价日历 */
+  if (!list.length) {
+    list = WINDOWS_2026
+      .map(parseDate)
+      .filter(function(d){ return effectiveTime(fmtDate(d)) > now; });
+
+    var last = parseDate(WINDOWS_2026[WINDOWS_2026.length - 1]);
+    var g = 0;
+    while (list.length < 4 && g < 40) {
+      last = addWorkdays(last, 10);
+      list.push(last);
+      g++;
+    }
+  }
+  UPCOMING = list.slice(0, 4);
+}
+
+var targetTime = null;
+function updateCountdown(){
+  buildUpcoming();
+  if (!UPCOMING.length) return;
+  var w = UPCOMING[0];
+  targetTime = effectiveTime(fmtDate(w));
+
+  document.getElementById('cdDate').textContent =
+    w.getFullYear() + '年' + (w.getMonth() + 1) + '月' + w.getDate() + '日 24:00';
+
+  var days = Math.max(Math.ceil((targetTime - new Date()) / 86400000), 0);
+  document.getElementById('cdMeta').textContent =
+    weekdayCN(w) + ' · 距今约 ' + days + ' 天 · 价格于当日 24 时起执行';
+
+  document.getElementById('upcoming').innerHTML = UPCOMING.map(function(d, i){
+    return '<li class="' + (i === 0 ? 'first' : '') + '">' +
+      '<b>' + (d.getMonth() + 1) + '月' + d.getDate() + '日</b>' +
+      '<span>' + weekdayCN(d) + (i === 0 ? ' · 下一轮' : '') + '</span>' +
+    '</li>';
+  }).join('');
+}
+
+function tick(){
+  if (!targetTime) return;
+  var now = new Date();
+  if (targetTime - now <= 0) {
+    updateCountdown();
+  }
+  var s = Math.max(Math.floor((targetTime - now) / 1000), 0);
+  document.getElementById('tD').textContent = pad(Math.floor(s / 86400));
+  document.getElementById('tH').textContent = pad(Math.floor(s % 86400 / 3600));
+  document.getElementById('tM').textContent = pad(Math.floor(s % 3600 / 60));
+  document.getElementById('tS').textContent = pad(s % 60);
+}
+
+/* ========================= 数据请求 ========================= */
+function jsonp(url, timeout){
+  return new Promise(function(resolve, reject){
+    var name = '__oil_cb_' + Date.now() + Math.floor(Math.random() * 1000);
+    var script = document.createElement('script');
+    var timer = setTimeout(function(){ fail(new Error('timeout')); }, timeout || 12000);
+
+    function cleanup(){
+      clearTimeout(timer);
+      try { delete window[name]; } catch (e) { window[name] = undefined; }
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+    function fail(err){ cleanup(); reject(err); }
+
+    window[name] = function(data){ cleanup(); resolve(data); };
+    script.onerror = function(){ fail(new Error('network')); };
+    script.src = url + '&callback=' + name;
+    document.head.appendChild(script);
+  });
+}
+
+/* 今日油价：一次请求拿到全部省份 */
+async function loadCurrent(){
+  try {
+    var res = await fetch(API_CURRENT, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var json = await res.json();
+    if (json.code !== 0 || !json.data || !Array.isArray(json.data.list) || !json.data.list.length) {
+      throw new Error('bad response');
+    }
+    /* 字段归一化，后续渲染统一使用 n92/n95/n0 */
+    state.currentAll = json.data.list.map(function(it){
+      return {
+        regionName: it.region,
+        date: it.date,
+        n92: Number(it.gasoline_92),
+        n92Change: Number(it.gasoline_92_chg),
+        n95: Number(it.gasoline_95),
+        n95Change: Number(it.gasoline_95_chg),
+        n0: Number(it.diesel_0),
+        n0Change: Number(it.diesel_0_chg)
+      };
+    });
+    state.priceErr = '';
+  } catch (e) {
+    state.currentAll = [];
+    state.priceErr = '今日油价接口请求失败';
+  }
+  pickCurrent();
+  renderPrices();
+}
+
+function pickCurrent(){
+  var prov = state.prov;
+  state.current = null;
+  for (var i = 0; i < state.currentAll.length; i++) {
+    if (normalizeProv(state.currentAll[i].regionName) === prov) {
+      state.current = state.currentAll[i];
+      break;
+    }
+  }
+}
+
+/* 历史调价：东方财富 JSONP，按省查询 */
+async function loadHistory(prov){
+  state.history = [];
+  state.historyErr = '';
+  var filter = encodeURIComponent('(CITYNAME="' + prov + '")');
+  var url = API_HISTORY +
+    '?reportName=RPTA_WEB_YJ_JH&columns=ALL&sortColumns=DIM_DATE&sortTypes=-1' +
+    '&pageNumber=1&pageSize=400&source=WEB&client=WEB&filter=' + filter;
+
+  try {
+    var json = await jsonp(url);
+    var rows = json && json.result && json.result.data;
+    if (!rows || !rows.length) throw new Error('empty');
+
+    state.history = rows.map(function(r){
+      var d92 = Number(r.ZDE92) || 0;
+      return {
+        date: String(r.DIM_DATE).slice(0, 10),
+        d: parseDate(String(r.DIM_DATE).slice(0, 10)),
+        p92: Number(r.V92) || 0,
+        p95: Number(r.V95) || 0,
+        p0: Number(r.V0) || 0,
+        d92: d92,
+        d95: Number(r.ZDE95) || 0,
+        d0: Number(r.ZDE0) || 0,
+        dir: dirOf(d92)
+      };
+    }).reverse();
+
+    state.history = state.history.filter(function(r){ return r.p92 > 0; });
+  } catch (e) {
+    state.historyErr = '历史调价数据加载失败';
+  }
+}
+
+/* ========================= 今日油价卡片 ========================= */
+var GRADES = [
+  { key: 'p92', api: 'n92', apiChg: 'n92Change', name: '92# 汽油', tag: '92#', color: '#ffb347' },
+  { key: 'p95', api: 'n95', apiChg: 'n95Change', name: '95# 汽油', tag: '95#', color: '#8f88ff' },
+  { key: 'p0',  api: 'n0',  apiChg: 'n0Change',  name: '0# 柴油',  tag: '0#',  color: '#38bdf8' }
+];
+
+function latestRecord(){
+  return state.history.length ? state.history[state.history.length - 1] : null;
+}
+
+function priceData(){
+  var row = state.current;
+  if (row) {
+    return {
+      date: row.date,
+      values: {
+        p92: Number(row.n92), p95: Number(row.n95), p0: Number(row.n0),
+        chg: { p92: Number(row.n92Change), p95: Number(row.n95Change), p0: Number(row.n0Change) }
+      },
+      source: 'api'
+    };
+  }
+  var rec = latestRecord();
+  if (rec) {
+    return {
+      date: rec.date,
+      values: {
+        p92: rec.p92, p95: rec.p95, p0: rec.p0,
+        chg: { p92: rec.d92, p95: rec.d95, p0: rec.d0 }
+      },
+      source: 'history'
+    };
+  }
+  return null;
+}
+
+function renderPrices(){
+  var data = priceData();
+  var grid = document.getElementById('priceGrid');
+
+  grid.innerHTML = GRADES.map(function(g){
+    var val = data ? data.values[g.key] : null;
+    var chg = data ? data.values.chg[g.key] : null;
+    var dir = chg === null || isNaN(chg) ? 'flat' : dirOf(chg);
+    var text = dir === 'flat' ? '较上轮持平' :
+      (dir === 'up' ? '↑ 上调 ' : '↓ 下调 ') + Math.abs(chg || 0).toFixed(2);
+    var price = (val && !isNaN(val)) ? val.toFixed(2) : '--';
+
+    return '<article class="price-card" style="--grade:' + g.color + '">' +
+      '<div class="pc-head"><span class="pc-name">' + g.name + '</span>' +
+      '<span class="pc-tag">' + g.tag + '</span></div>' +
+      '<div class="pc-value">' + price + '<small>元/升</small></div>' +
+      '<div class="pc-change ' + dir + '">' + text + (dir === 'flat' ? '' : ' 元/升') + '</div>' +
+      '<div class="pc-date">' + (data ? data.date + ' 调价后价格' : '暂无数据') + '</div>' +
+    '</article>';
+  }).join('');
+
+  document.getElementById('updatedAt').textContent = data ? data.date : '--';
+
+  var box = document.getElementById('dataStatus');
+  var txt = document.getElementById('statusText');
+  box.classList.remove('error');
+  box.querySelectorAll('.retry').forEach(function(b){ b.remove(); });
+
+  if (state.priceErr && data && data.source === 'history') {
+    txt.textContent = '今日油价接口暂不可用，已切换备用数据源（东方财富）';
+  } else if (!data) {
+    box.classList.add('error');
+    txt.textContent = '油价数据加载失败，请检查网络后重试';
+    addRetry(box);
+  } else {
+    txt.textContent = '数据来源：api.ruseo.cn 油价接口 · ' + state.prov + ' · ' + data.date + ' 调价后';
+  }
+}
+
+function addRetry(parent){
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'retry';
+  btn.textContent = '重新加载';
+  btn.addEventListener('click', function(){ reloadAll(); });
+  parent.appendChild(btn);
+}
+
+/* ========================= 趋势图 ========================= */
+var chartBox = { w: 900, h: 340 };   /* 实际渲染尺寸随容器宽度自适应 */
+var M = { l: 50, r: 16, t: 22, b: 32 };
+var chartKey = 'p92';
+var chartMonths = 12;
+var chartPoints = [];
+
+var SERIES_COLOR = { p92: '#ffb347', p95: '#8f88ff', p0: '#38bdf8' };
+var SERIES_NAME = { p92: '92#汽油', p95: '95#汽油', p0: '0#柴油' };
+
+/* 按容器宽度计算画布尺寸，保证手机端刻度文字清晰 */
+function chartSize(){
+  var wrap = document.getElementById('chartWrap');
+  var w = Math.max(Math.round(wrap.clientWidth || 900), 280);
+  var h = w < 560 ? 240 : (w < 820 ? 290 : 340);
+  return { w: w, h: h };
+}
+
+
+function niceStep(range, count){
+  var raw = range / count;
+  var pow = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+  var norm = raw / pow;
+  var step;
+  if (norm <= 1) step = 1;
+  else if (norm <= 2) step = 2;
+  else if (norm <= 2.5) step = 2.5;
+  else if (norm <= 5) step = 5;
+  else step = 10;
+  return step * pow;
+}
+
+function rangeData(){
+  var all = state.history;
+  if (!all.length) return [];
+  if (!chartMonths) return all.slice();
+  var from = new Date(TODAY.getTime());
+  from.setMonth(from.getMonth() - chartMonths);
+  var arr = all.filter(function(r){ return r.d >= from; });
+  return arr.length >= 2 ? arr : all.slice(-2);
+}
+
+function renderChart(){
+  var svg = document.getElementById('chart');
+  var empty = document.getElementById('chartEmpty');
+  var data = rangeData();
+
+  if (data.length === 0) {
+    svg.innerHTML = '';
+    svg.style.display = 'none';
+    empty.style.display = 'flex';
+    empty.textContent = state.historyErr || '暂无趋势数据';
+    document.getElementById('stats').innerHTML = '';
+    return;
+  }
+  svg.style.display = 'block';
+  empty.style.display = 'none';
+
+  var color = SERIES_COLOR[chartKey];
+  var size = chartSize();
+  var W = size.w, H = size.h;
+  chartBox.w = W;
+  chartBox.h = H;
+  var iw = W - M.l - M.r;
+  var ih = H - M.t - M.b;
+
+  var vals = data.map(function(r){ return r[chartKey]; });
+  var minV = Math.min.apply(null, vals);
+  var maxV = Math.max.apply(null, vals);
+  if (maxV - minV < 0.02) { maxV += 0.05; minV -= 0.05; }
+  var step = niceStep(maxV - minV, 4);
+  var yMin = Math.floor(minV / step) * step;
+  var yMax = Math.ceil(maxV / step) * step;
+  if (yMax === yMin) yMax = yMin + step;
+
+  var t0 = data[0].d.getTime();
+  var t1 = data[data.length - 1].d.getTime();
+  function px(t){ return t0 === t1 ? M.l + iw / 2 : M.l + (t - t0) / (t1 - t0) * iw; }
+  function py(v){ return M.t + ih - (v - yMin) / (yMax - yMin) * ih; }
+
+  var grid = '';
+  for (var v = yMin; v <= yMax + 0.0001; v += step) {
+    var yy = py(v);
+    grid += '<line x1="' + M.l + '" y1="' + yy.toFixed(1) + '" x2="' + (M.l + iw) +
+      '" y2="' + yy.toFixed(1) + '" stroke="rgba(255,255,255,.07)" stroke-width="1"/>' +
+      '<text x="' + (M.l - 10) + '" y="' + (yy + 4).toFixed(1) +
+      '" text-anchor="end" font-size="11" fill="#8b93b8">' + v.toFixed(2) + '</text>';
+  }
+
+  var xLabels = '';
+  var tickCount = Math.min(W < 560 ? 4 : 6, data.length);
+  for (var i = 0; i < tickCount; i++) {
+    var idx = tickCount === 1 ? 0 : Math.round(i * (data.length - 1) / (tickCount - 1));
+    var rec = data[idx];
+    var xx = px(rec.d.getTime());
+    var anchor = i === 0 ? 'start' : (i === tickCount - 1 ? 'end' : 'middle');
+    xLabels += '<text x="' + xx.toFixed(1) + '" y="' + (H - 10) +
+      '" text-anchor="' + anchor + '" font-size="11" fill="#8b93b8">' +
+      rec.date.slice(2).replace(/-/g, '/') + '</text>';
+  }
+
+  chartPoints = data.map(function(r){
+    return { px: px(r.d.getTime()), py: py(r[chartKey]), rec: r };
+  });
+  var lineD = chartPoints.map(function(p, i){
+    return (i === 0 ? 'M' : 'L') + p.px.toFixed(1) + ' ' + p.py.toFixed(1);
+  }).join(' ');
+  var areaD = lineD + ' L' + chartPoints[chartPoints.length - 1].px.toFixed(1) + ' ' +
+    (M.t + ih) + ' L' + chartPoints[0].px.toFixed(1) + ' ' + (M.t + ih) + ' Z';
+
+  /* 点位过多时只画折线，避免拥挤 */
+  var dots = data.length > 80 ? '' : chartPoints.map(function(p){
+    return '<circle cx="' + p.px.toFixed(1) + '" cy="' + p.py.toFixed(1) +
+      '" r="3" fill="' + color + '" stroke="rgba(10,6,28,.9)" stroke-width="1.5"/>';
+  }).join('');
+
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  svg.innerHTML =
+    '<defs>' +
+      '<linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0%" stop-color="' + color + '" stop-opacity="0.34"/>' +
+        '<stop offset="100%" stop-color="' + color + '" stop-opacity="0"/>' +
+      '</linearGradient>' +
+    '</defs>' +
+    grid + xLabels +
+    '<path d="' + areaD + '" fill="url(#areaGrad)"/>' +
+    '<path d="' + lineD + '" fill="none" stroke="' + color +
+      '" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>' +
+    dots +
+    '<line id="hoverLine" x1="0" y1="' + M.t + '" x2="0" y2="' + (M.t + ih) +
+      '" stroke="rgba(255,255,255,.35)" stroke-dasharray="4 4" opacity="0"/>' +
+    '<circle id="hoverDot" r="5.5" fill="' + color + '" stroke="#fff" stroke-width="2" opacity="0"/>';
+
+  document.getElementById('chartTip').style.opacity = 0;
+  renderStats(data);
+}
+
+function bindChartHover(){
+  var svg = document.getElementById('chart');
+  var wrap = document.getElementById('chartWrap');
+  var tip = document.getElementById('chartTip');
+
+  function move(e){
+    if (!chartPoints.length) return;
+    var rect = svg.getBoundingClientRect();
+    if (!rect.width) return;
+    var mx = (e.clientX - rect.left) / rect.width * chartBox.w;
+    var best = chartPoints[0], bestD = Infinity;
+    chartPoints.forEach(function(p){
+      var d = Math.abs(p.px - mx);
+      if (d < bestD) { bestD = d; best = p; }
+    });
+    if (bestD > 60) { leave(); return; }
+
+    var line = svg.querySelector('#hoverLine');
+    var dot = svg.querySelector('#hoverDot');
+    if (line) {
+      line.setAttribute('x1', best.px); line.setAttribute('x2', best.px);
+      line.setAttribute('opacity', '1');
+    }
+    if (dot) {
+      dot.setAttribute('cx', best.px); dot.setAttribute('cy', best.py);
+      dot.setAttribute('opacity', '1');
+    }
+
+    var rec = best.rec;
+    var chg = rec['d' + chartKey.slice(1)];
+    var dir = dirOf(Number(chg) || 0);
+    tip.innerHTML =
+      '<div class="tip-date">' + rec.date + ' · ' + SERIES_NAME[chartKey] + '</div>' +
+      '<b>' + rec[chartKey].toFixed(2) + '</b> 元/升 ' +
+      '<span class="delta ' + dir + '">' +
+        (dir === 'flat' ? '持平' : (dir === 'up' ? '↑' : '↓') + Math.abs(Number(chg) || 0).toFixed(2)) +
+      '</span>';
+    var tipX = best.px / chartBox.w * rect.width;
+    tipX = Math.max(88, Math.min(tipX, rect.width - 88));
+    tip.style.left = tipX + 'px';
+    tip.style.top = (best.py / chartBox.h * rect.height) + 'px';
+    tip.style.opacity = 1;
+  }
+  function leave(){
+    tip.style.opacity = 0;
+    var line = svg.querySelector('#hoverLine');
+    var dot = svg.querySelector('#hoverDot');
+    if (line) line.setAttribute('opacity', '0');
+    if (dot) dot.setAttribute('opacity', '0');
+  }
+  svg.addEventListener('pointermove', move);
+  svg.addEventListener('pointerleave', leave);
+  wrap.addEventListener('pointerleave', leave);
+}
+
+function renderStats(data){
+  var vals = data.map(function(r){ return r[chartKey]; });
+  var maxV = Math.max.apply(null, vals);
+  var minV = Math.min.apply(null, vals);
+  var maxRec = data.find(function(r){ return r[chartKey] === maxV; });
+  var minRec = data.find(function(r){ return r[chartKey] === minV; });
+  var net = round2(vals[vals.length - 1] - vals[0]);
+  var pct = vals[0] ? net / vals[0] * 100 : 0;
+  var up = 0, down = 0, flat = 0;
+  data.forEach(function(r){
+    if (r.dir === 'up') up++;
+    else if (r.dir === 'down') down++;
+    else flat++;
+  });
+
+  document.getElementById('stats').innerHTML =
+    '<div class="stat"><div class="k">区间最高</div><div class="v">' + maxV.toFixed(2) +
+      '<span class="s"> 元/升 · ' + maxRec.date + '</span></div></div>' +
+    '<div class="stat"><div class="k">区间最低</div><div class="v">' + minV.toFixed(2) +
+      '<span class="s"> 元/升 · ' + minRec.date + '</span></div></div>' +
+    '<div class="stat"><div class="k">区间涨跌</div><div class="v ' + (net > 0 ? 'up' : net < 0 ? 'down' : '') + '">' +
+      signed(net) + '<span class="s"> 元/升 (' + signed(pct) + '%)</span></div></div>' +
+    '<div class="stat"><div class="k">调价次数</div><div class="v">' + (up + down + flat) +
+      '<span class="s"> 上调 ' + up + ' · 下调 ' + down + ' · 搁浅 ' + flat + '</span></div></div>';
+}
+
+/* ========================= 历史调价表 ========================= */
+var historyFilter = 'all';
+var historyExpanded = false;
+var PAGE_SIZE = 10;
+
+function renderHistory(){
+  var body = document.getElementById('historyBody');
+  var moreBtn = document.getElementById('moreBtn');
+
+  if (!state.history.length) {
+    body.innerHTML = '<tr><td colspan="6" class="empty">' +
+      (state.historyErr || '数据加载中…') + '</td></tr>';
+    moreBtn.style.display = 'none';
+    return;
+  }
+
+  var rows = state.history.slice().reverse().filter(function(r){
+    return historyFilter === 'all' || r.dir === historyFilter;
+  });
+
+  if (!rows.length) {
+    body.innerHTML = '<tr><td colspan="6" class="empty">暂无该类型调价记录</td></tr>';
+    moreBtn.style.display = 'none';
+    return;
+  }
+
+  var shown = historyExpanded ? rows : rows.slice(0, PAGE_SIZE);
+  body.innerHTML = shown.map(function(r){
+    var txt = r.dir === 'flat' ? '持平' :
+      (r.dir === 'up' ? '↑ ' : '↓ ') + Math.abs(r.d92).toFixed(2);
+    var label = r.dir === 'up' ? '上调' : (r.dir === 'down' ? '下调' : '搁浅');
+    return '<tr>' +
+      '<td>' + r.date + '</td>' +
+      '<td>' + r.p92.toFixed(2) + '</td>' +
+      '<td>' + r.p95.toFixed(2) + '</td>' +
+      '<td>' + r.p0.toFixed(2) + '</td>' +
+      '<td><span class="delta ' + r.dir + '">' + txt + '</span></td>' +
+      '<td><span class="pill ' + r.dir + '">' + label + '</span></td>' +
+    '</tr>';
+  }).join('');
+
+  if (rows.length <= PAGE_SIZE) {
+    moreBtn.style.display = 'none';
+  } else {
+    moreBtn.style.display = '';
+    moreBtn.textContent = historyExpanded ? '收起' : '展开全部（' + rows.length + ' 条）';
+  }
+}
+
+/* ========================= 省份切换与事件 ========================= */
+function initProvinceSelect(){
+  var sel = document.getElementById('provSelect');
+  sel.innerHTML = PROVINCES.map(function(p){
+    return '<option value="' + p + '"' + (p === state.prov ? ' selected' : '') + '>' + p + '</option>';
+  }).join('');
+  sel.addEventListener('change', function(){
+    state.prov = sel.value;
+    try { localStorage.setItem('oil_prov', state.prov); } catch (e) {}
+    pickCurrent();
+    renderPrices();
+    loadHistory(state.prov).then(function(){
+      updateCountdown();
+      renderChart();
+      renderHistory();
+    });
+  });
+}
+
+document.getElementById('seriesTabs').addEventListener('click', function(e){
+  var btn = e.target.closest('.tab');
+  if (!btn) return;
+  this.querySelectorAll('.tab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  chartKey = btn.dataset.key;
+  renderChart();
+});
+
+document.getElementById('rangeChips').addEventListener('click', function(e){
+  var btn = e.target.closest('.chip');
+  if (!btn) return;
+  this.querySelectorAll('.chip').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  chartMonths = Number(btn.dataset.months);
+  renderChart();
+});
+
+document.getElementById('filterChips').addEventListener('click', function(e){
+  var btn = e.target.closest('.chip');
+  if (!btn) return;
+  this.querySelectorAll('.chip').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  historyFilter = btn.dataset.f;
+  historyExpanded = false;
+  renderHistory();
+});
+
+document.getElementById('moreBtn').addEventListener('click', function(){
+  historyExpanded = !historyExpanded;
+  renderHistory();
+});
+
+/* ========================= 初始化 ========================= */
+function reloadAll(silent){
+  if (!silent) document.getElementById('statusText').textContent = '正在获取最新油价…';
+  loadCurrent();
+  loadHistory(state.prov).then(function(){
+    updateCountdown();
+    renderChart();
+    renderHistory();
+  });
+}
+
+(function init(){
+  var saved = '';
+  try { saved = localStorage.getItem('oil_prov') || ''; } catch (e) {}
+  state.prov = PROVINCES.indexOf(saved) >= 0 ? saved : '新疆';
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  initProvinceSelect();
+  renderPrices();
+  updateCountdown();
+  tick();
+  setInterval(tick, 1000);
+  setInterval(updateCountdown, 60000);
+
+  /* 每 10 分钟静默刷新一次行情数据 */
+  setInterval(function(){ reloadAll(true); }, 10 * 60 * 1000);
+  bindChartHover();
+
+  /* 窗口尺寸变化时重绘趋势图，保持手机/电脑下的刻度清晰 */
+  var resizeTimer = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      if (state.history.length) renderChart();
+    }, 180);
+  });
+
+  reloadAll();
+})();
+</script>
+</body>
+</html>
